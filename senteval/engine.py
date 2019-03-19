@@ -1,10 +1,3 @@
-# Copyright (c) 2017-present, Facebook, Inc.
-# All rights reserved.
-#
-# This source code is licensed under the license found in the
-# LICENSE file in the root directory of this source tree.
-#
-
 '''
 
 Generic sentence evaluation scripts wrapper
@@ -13,21 +6,14 @@ Generic sentence evaluation scripts wrapper
 from __future__ import absolute_import, division, unicode_literals
 
 from senteval import utils
-from senteval.binary import CREval, MREval, MPQAEval, SUBJEval
 from senteval.snli import SNLIEval
 from senteval.rqe import RQEEval
-from senteval.trec import TRECEval
 from senteval.rct20k import RCT20KEval
 from senteval.bioc import BIOCEval
 from senteval.pico import PICOEval
-from senteval.sick import SICKRelatednessEval, SICKEntailmentEval
-from senteval.mrpc import MRPCEval
 from senteval.clinicalsa import ClinicalSAEval
 from senteval.citationsa import CitationSAEval
-from senteval.sts import STS14Eval, STSBenchmarkEval,ClinicalSTSEval,BIOSSESEval
-from senteval.sst import SSTEval
-from senteval.rank import ImageCaptionRetrievalEval
-from senteval.probing import *
+from senteval.sts import ClinicalSTSEval,BIOSSESEval
 
 class SE(object):
     def __init__(self, params, batcher, prepare=None):
@@ -63,33 +49,9 @@ class SE(object):
         tpath = self.params.task_path
         assert name in self.list_tasks, str(name) + ' not in ' + str(self.list_tasks)
 
-        # Original SentEval tasks
-        if name == 'CR':
-            self.evaluation = CREval(tpath + '/downstream/CR', seed=self.params.seed)
-        elif name == 'MR':
-            self.evaluation = MREval(tpath + '/downstream/MR', seed=self.params.seed)
-        elif name == 'MPQA':
-            self.evaluation = MPQAEval(tpath + '/downstream/MPQA', seed=self.params.seed)
-        elif name == 'SUBJ':
-            self.evaluation = SUBJEval(tpath + '/downstream/SUBJ', seed=self.params.seed)
-        elif name == 'SST2':
-            self.evaluation = SSTEval(tpath + '/downstream/SST/binary', nclasses=2, seed=self.params.seed)
-        elif name == 'SST5':
-            self.evaluation = SSTEval(tpath + '/downstream/SST/fine', nclasses=5, seed=self.params.seed)
-        elif name == 'TREC':
-            self.evaluation = TRECEval(tpath + '/downstream/TREC', seed=self.params.seed)
-        elif name == 'MRPC':
-            self.evaluation = MRPCEval(tpath + '/downstream/MRPC', seed=self.params.seed)
-        elif name == 'SICKRelatedness':
-            self.evaluation = SICKRelatednessEval(tpath + '/downstream/SICK', seed=self.params.seed)
-        elif name == 'STSBenchmark':
-            self.evaluation = STSBenchmarkEval(tpath + '/downstream/STS/STSBenchmark', seed=self.params.seed)
+        # MedSentEval tasks
         elif name == 'ClinicalSTS2':
             self.evaluation = STSBenchmarkEval(tpath + '/ClinicalSTS2', seed=self.params.seed)
-        elif name == 'SICKEntailment':
-            self.evaluation = SICKEntailmentEval(tpath + '/downstream/SICK', seed=self.params.seed)
-        elif name == 'SNLI':
-            self.evaluation = SNLIEval(tpath + '/downstream/SNLI', seed=self.params.seed)
         elif name == 'MEDNLI':
             self.evaluation = SNLIEval(tpath + '/MEDNLI', seed=self.params.seed)
         elif name == 'RQE':
@@ -106,13 +68,10 @@ class SE(object):
             self.evaluation = PICOEval(tpath + '/PICO', seed=self.params.seed)
         elif name == 'CHEMPROT':
             self.evaluation = CHEMPROTEval(tpath + '/CHEMPROT', seed=self.params.seed)
-        elif name in ['STS14']:
-            fpath ='sts-en-test-gs-2014'
-            self.evaluation = eval(name + 'Eval')(tpath + '/STS14' , seed=self.params.seed)
-        elif name in ['ClinicalSTS']:
-            self.evaluation = eval(name + 'Eval')(tpath + '/ClinicalSTS', seed=self.params.seed)
-        elif name in ['BIOSSES']:
-            self.evaluation = eval(name + 'Eval')(tpath + '/BIOSSES', seed=self.params.seed)                                   
+        elif name=='ClinicalSTS':
+            self.evaluation = ClinicalSTSEval(tpath + '/ClinicalSTS', seed=self.params.seed)
+        elif name=='BIOSSES':
+            self.evaluation = BIOSSESEval(tpath + '/BIOSSES', seed=self.params.seed)                                   
                            
         self.params.current_task = name
         self.evaluation.do_prepare(self.params, self.prepare)
