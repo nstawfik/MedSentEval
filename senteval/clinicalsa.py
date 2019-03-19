@@ -18,8 +18,8 @@ import logging
 from senteval.tools.validation import InnerKFoldClassifier
 
 
-class CitationSAEval(object):
-    logging.info('***** Transfer task :Biomedical Citation Sentiment Analysis *****\n\n')
+class ClinicalSAEval(object):
+    logging.info('***** Transfer task :Vaccination Tweets Sentiment Analysis *****\n\n')
     def __init__(self, task_path, seed=1111):
         self.seed = seed
         self.data = self.loadFile(os.path.join(task_path, 'train.txt'))
@@ -30,20 +30,21 @@ class CitationSAEval(object):
         # prepare is given the whole text
         samples = self.data['X']
         return prepare(params, samples)
-        
+        # prepare puts everything it outputs in "params" : params.word2id etc
+        # Those output will be further used by "batcher".
 
     def loadFile(self, fpath):
         data = {'X': [], 'y': []}
-        tgt2idx = {'positive': 0, 'neutral': 1, 'negative': 2}
+        tgt2idx = {'Positive': 0, 'Neutral': 1, 'Unrelated': 2,'NegSafety': 3, 'NegOthers': 4,'NegEfficacy': 5, 'NegCost': 6,'NegResistant': 7}
         with io.open(fpath, 'r', encoding='latin-1') as f:
             for line in f:
                 try:
-                  label,text = line.split('\t')
+                  id,label,text = line.split('\t')
                   data['X'].append(text.split(' '))
                   data['y'].append(tgt2idx[label])
                 except:
                   pass
-        
+        #print(len(data['X']),len(data['y']))
         return data
 
     def run(self, params, batcher):
@@ -61,7 +62,7 @@ class CitationSAEval(object):
         enc_input = np.vstack(enc_input)
         logging.info('Generated sentence embeddings')
 
-        config = {'nclasses': 3, 'seed': self.seed,
+        config = {'nclasses': 8, 'seed': self.seed,
                   'usepytorch': params.usepytorch,
                   'classifier': params.classifier,
                   'nhid': params.nhid, 'kfold': params.kfold}
