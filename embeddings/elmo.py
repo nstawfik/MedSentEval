@@ -20,6 +20,8 @@ parser.add_argument("--data_path", type=str, default='./data', help="Path to dat
 parser.add_argument("--nhid", type=int, default=0, help="number of hidden layers: 0 for Logistic Regression or >0 for MLP (default 0)")
 parser.add_argument('--tasks', nargs='+', default=['BIOSSES', 'ClinicalSTS', 'PICO' ,'PUBMED20K','RQE','MEDNLI','ClinicalSTS2'] ,help="Bio Tasks to evaluate (default [BIOSSES ClinicalSTS PICO PUBMED20K RQE MEDNLI RQE] )")
 parser.add_argument('--model', type=str, choices=['original','small','pubmed'],default= 'original',help="ELMO Model (default original)")
+parser.add_argument("--folds", type=int, default=10, help="number of k-folds for cross validations(default 10)")
+
 params, _ = parser.parse_known_args()
 # Set PATHs
 PATH_TO_SENTEVAL = '../'
@@ -39,7 +41,7 @@ import senteval
 # Set params for SentEval
 # we use logistic regression (usepytorch: Fasle) and kfold 10
 # In this dictionary you can add extra information that you model needs for initialization
-params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': 5}
+params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': params.folds}
 # this is the config for the NN classifier but we are going to use scikit-learn logistic regression with 10 kfold
 # usepytorch = False 
 
