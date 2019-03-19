@@ -47,8 +47,8 @@ nhid=params.nhid
 params_senteval['classifier'] ={'nhid': nhid, 'optim': 'adam','batch_size': 64, 'tenacity': 5,'epoch_size': 4}
 
 
-assert os.path.isfile(MODEL_PATH) and os.path.isfile(PATH_TO_W2V), \
-    'Set MODEL and GloVe PATHs'
+#assert os.path.isfile(MODEL_PATH) and os.path.isfile(PATH_TO_W2V), \
+#    'Set MODEL and GloVe PATHs'
 
 # import senteval
 sys.path.insert(0, PATH_SENTEVAL)
