@@ -16,38 +16,39 @@ import os
 import torch
 import logging
 import sys
-
-print(sys.argv[1:])
-# get models.py from InferSent repo
 from models import InferSent
+import argparse
+
+parser = argparse.ArgumentParser(description='InferSent Embeddings')
+
+parser.add_argument("--data_path", type=str, default='./data', help="Path to data (default ./data)")
+parser.add_argument('--embedding_path', type=str, default= './embeddings/glove/glove.840B.300d.txt',help="Path to embeddings (default ./embeddings/glove/glove.840B.300d.txt")
+parser.add_argument('--model_path', type=str, default= './embeddings/infersent/infersent1.pkl',help="Path to InferSent model (default ./embeddings/infersent/infersent1.pkl")
+parser.add_argument("--nhid", type=int, default=0, help="number of hidden layers: 0 for Logistic Regression or >0 for MLP (default 0)")
+parser.add_argument('--tasks', nargs='+', default=['BIOSSES', 'ClinicalSTS', 'PICO' ,'PUBMED20K','RQE','MEDNLI','ClinicalSTS2'] ,help="Bio Tasks to evaluate (default [BIOSSES ClinicalSTS PICO PUBMED20K RQE MEDNLI RQE] )")
+parser.add_argument("--folds", type=int, default=0, help="number of k-folds for cross validations(default 10)")
+parser.add_argument("--version", type=int, default=1, help="Infersent version(default 1)")
+
+params, _ = parser.parse_known_args()
+# Set PATHs
+PATH_TO_SENTEVAL = '../'
+PATH_TO_DATA = params.data_path
+PATH_TO_W2V =  params.embedding_path
+MODEL_PATH = params.model_path
+V=params.version
+params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': params.folds}
 
 # Set up logger
-
 logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
-logging.info("\n\n\nPATH_TO_DATA: " + str(sys.argv[1]) + "\nPATH_TO_W2V: " + str(sys.argv[2]) + "\nMODEL_PATH: " + str(
-    sys.argv[3]) + "\n\n")
+logging.info("-------------------------------------INFERSENT MODEL-------------------------------------"+"\nPATH_TO_DATA: " + str(PATH_TO_DATA) +"\nPATH_TO_VEC: "+ str(PATH_TO_VEC)+"\nTASKS: "+ str(params.tasks))
 
-# Set PATHs
-PATH_SENTEVAL = '../'
-PATH_TO_DATA = sys.argv[1]  # '../data'
-PATH_TO_W2V = sys.argv[2]  # 'fasttext/crawl-300d-2M.vec'# 'glove/glove.840B.300d.txt'  # or crawl-300d-2M.vec for V2
-MODEL_PATH = sys.argv[3]  # 'infersent2.pkl'
-V = int(sys.argv[4])  # 2 # version of InferSent
+
+nhid=params.nhid
+params_senteval['classifier'] ={'nhid': nhid, 'optim': 'adam','batch_size': 64, 'tenacity': 5,'epoch_size': 4}
+
 
 assert os.path.isfile(MODEL_PATH) and os.path.isfile(PATH_TO_W2V), \
     'Set MODEL and GloVe PATHs'
-
-# define senteval params
-params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': 10}
-
-if (len(sys.argv)>5):
-    nhid = int(sys.argv[5])
-else:
-    nhid=0
-
-#params_senteval['classifier'] = {'nhid':nhid , 'optim': 'rmsprop', 'batch_size': 128,'tenacity': 3, 'epoch_size': 2}
-params_senteval['classifier'] ={'nhid': 0, 'optim': 'adam','batch_size': 64, 'tenacity': 5,'epoch_size': 4}
-
 
 # import senteval
 sys.path.insert(0, PATH_SENTEVAL)
@@ -79,6 +80,6 @@ if __name__ == "__main__":
     params_senteval['infersent'] = model.cuda()
 
     se = senteval.engine.SE(params_senteval, batcher, prepare)
-    transfer_tasks = ['MEDNLI','ClinicalSTS','BIOSSES','ClinicalSTS2']
+    transfer_tasks = params.tasks
     results = se.eval(transfer_tasks)
     print(results)
