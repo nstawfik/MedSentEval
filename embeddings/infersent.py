@@ -40,7 +40,7 @@ params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': param
 
 # Set up logger
 logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
-logging.info("-------------------------------------INFERSENT MODEL-------------------------------------"+"\nPATH_TO_DATA: " + str(PATH_TO_DATA) +"\nPATH_TO_VEC: "+ str(PATH_TO_VEC)+"\nTASKS: "+ str(params.tasks))
+logging.info("-------------------------------------INFERSENT MODEL-------------------------------------"+"\nPATH_TO_DATA: " + str(PATH_TO_DATA) +"\nPATH_TO_VEC: "+ str(PATH_TO_W2V)+"\nTASKS: "+ str(params.tasks))
 
 
 nhid=params.nhid
