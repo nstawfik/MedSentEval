@@ -26,7 +26,7 @@ parser.add_argument('--embedding_path', type=str, default= './embeddings/glove/g
 parser.add_argument('--model_path', type=str, default= './embeddings/infersent/infersent1.pkl',help="Path to InferSent model (default ./embeddings/infersent/infersent1.pkl")
 parser.add_argument("--nhid", type=int, default=0, help="number of hidden layers: 0 for Logistic Regression or >0 for MLP (default 0)")
 parser.add_argument('--tasks', nargs='+', default= ['BioC','CitationSA','ClinicalSA','BioASQ','PICO','PUBMED20K','RQE','ClinicalSTS','BIOSSES','MEDNLI'] ,help="Bio Tasks to evaluate (default ALL TASKS)")
-parser.add_argument("--folds", type=int, default=0, help="number of k-folds for cross validations(default 10)")
+parser.add_argument("--folds", type=int, default=10, help="number of k-folds for cross validations(default 10)")
 parser.add_argument("--version", type=int, default=1, help="Infersent version(default 1)")
 
 params, _ = parser.parse_known_args()
