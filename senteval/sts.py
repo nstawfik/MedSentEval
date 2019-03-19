@@ -17,8 +17,6 @@ import logging
 from scipy.stats import spearmanr, pearsonr
 
 from senteval.utils import cosine
-from senteval.sick import SICKRelatednessEval
-
 
 class STSEval(object):
     def loadFile(self, fpath):
