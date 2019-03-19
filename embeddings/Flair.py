@@ -38,12 +38,12 @@ logging.info("-------------------------------------FLAIR MODEL------------------
 
 
 # Set PATHs
-PATH_SENTEVAL = '../'
+PATH_TO_SENTEVAL = '../'
 PATH_TO_DATA = params.data_path
 
 
-# import SentEval
-sys.path.insert(0, PATH_SENTEVAL)
+# import senteval
+sys.path.insert(0, PATH_TO_SENTEVAL)
 import senteval
 
 # Set params for SentEval
