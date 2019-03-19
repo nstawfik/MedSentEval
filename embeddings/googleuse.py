@@ -14,16 +14,30 @@ import tensorflow as tf
 import tensorflow_hub as hub
 tf.logging.set_verbosity(0)
 
+import argparse
 
+parser = argparse.ArgumentParser(description='Goggle USE Embeddings')
+
+parser.add_argument("--data_path", type=str, default='./data', help="Path to data (default ./data)")
+parser.add_argument("--nhid", type=int, default=0, help="number of hidden layers: 0 for Logistic Regression or >0 for MLP (default 0)")
+parser.add_argument('--tasks', nargs='+', default=['BIOSSES', 'ClinicalSTS', 'PICO' ,'PUBMED20K','RQE','MEDNLI','ClinicalSTS2'] ,help="Bio Tasks to evaluate (default [BIOSSES ClinicalSTS PICO PUBMED20K RQE MEDNLI RQE] )")
+parser.add_argument("--folds", type=int, default=0, help="number of k-folds for cross validations(default 10)")
+
+params, _ = parser.parse_known_args()
+# Set PATHs
+PATH_TO_SENTEVAL = '../'
+PATH_TO_DATA = params.data_path
+PATH_TO_VEC =  params.embedding_path
+params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': params.folds}
 
 # Set up logger
 logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
-logging.info("GOOGLE USE MODEL (params: Path to Data & # of Hidden Layers[optional] )")
-logging.info("\n\n\nPATH_TO_DATA: " + str(sys.argv[1])+ "\n\n")
+logging.info("-------------------------------------GOOGLE USE MODEL-------------------------------------"+"\nPATH_TO_DATA: " + str(PATH_TO_DATA) +"\nPATH_TO_VEC: "+ str(PATH_TO_VEC)+"\nTASKS: "+ str(params.tasks))
 
-# Set PATHs
-PATH_TO_SENTEVAL = '../'
-PATH_TO_DATA = sys.argv[1]  # '../data'
+
+nhid=params.nhid
+params_senteval['classifier'] ={'nhid': nhid, 'optim': 'adam','batch_size': 64, 'tenacity': 5,'epoch_size': 4}
+
 
 # import SentEval
 sys.path.insert(0, PATH_TO_SENTEVAL)
@@ -69,6 +83,6 @@ params_senteval['google_use'] = encoder
 
 if __name__ == "__main__":
     se = senteval.engine.SE(params_senteval, batcher, prepare)
-    transfer_tasks = ['MEDNLI','ClinicalSTS','BIOSSES','ClinicalSTS2']
+    transfer_tasks = params.tasks
     results = se.eval(transfer_tasks)
     print(results)
