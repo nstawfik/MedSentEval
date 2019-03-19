@@ -50,9 +50,8 @@ class SE(object):
         assert name in self.list_tasks, str(name) + ' not in ' + str(self.list_tasks)
 
         # MedSentEval tasks
-        elif name == 'ClinicalSTS2':
-            self.evaluation = STSBenchmarkEval(tpath + '/ClinicalSTS2', seed=self.params.seed)
-        elif name == 'MEDNLI':
+        
+        if name == 'MEDNLI':
             self.evaluation = SNLIEval(tpath + '/MEDNLI', seed=self.params.seed)
         elif name == 'RQE':
             self.evaluation = RQEEval(tpath + '/RQE', seed=self.params.seed)
@@ -66,7 +65,7 @@ class SE(object):
             self.evaluation = RCT20KEval(tpath + '/ RCT20K', seed=self.params.seed)
         elif name == 'PICO':
             self.evaluation = PICOEval(tpath + '/PICO', seed=self.params.seed)
-        elif name == 'CHEMPROT':
+        elif name == 'BioASQ':
             self.evaluation = CHEMPROTEval(tpath + '/CHEMPROT', seed=self.params.seed)
         elif name=='ClinicalSTS':
             self.evaluation = ClinicalSTSEval(tpath + '/ClinicalSTS', seed=self.params.seed)
