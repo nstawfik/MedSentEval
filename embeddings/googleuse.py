@@ -63,16 +63,6 @@ def make_embed_fn(module):
     session = tf.train.MonitoredSession()
   return lambda x: session.run(embeddings, {sentences: x})
 
-# define senteval params
-params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': 10}
-
-if (len(sys.argv)>3):
-    nhid = int(sys.argv[3])
-else:
-    nhid=0
-
-#params_senteval['classifier'] = {'nhid':nhid , 'optim': 'rmsprop', 'batch_size': 128,'tenacity': 3, 'epoch_size': 2}
-params_senteval['classifier'] ={'nhid': nhid, 'optim': 'adam','batch_size': 64, 'tenacity': 5,'epoch_size': 4}
 
 # Start TF session and load Google Universal Sentence Encoder
 encoder = make_embed_fn("https://tfhub.dev/google/universal-sentence-encoder-large/3")
