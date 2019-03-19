@@ -1,13 +1,4 @@
-# Copyright (c) 2017-present, Facebook, Inc.
-# All rights reserved.
-#
-# This source code is licensed under the license found in the
-# LICENSE file in the root directory of this source tree.
-#
 
-'''
-Binary classifier and corresponding datasets : MR, CR, SUBJ, MPQA
-'''
 from __future__ import absolute_import, division, unicode_literals
 
 import io
@@ -19,8 +10,9 @@ from senteval.tools.validation import InnerKFoldClassifier
 
 
 class CitationSAEval(object):
-    logging.info('***** Transfer task :Biomedical Citation Sentiment Analysis *****\n\n')
+    
     def __init__(self, task_path, seed=1111):
+        logging.info('***** Transfer task :Biomedical Citation Sentiment Analysis *****\n\n')
         self.seed = seed
         self.data = self.loadFile(os.path.join(task_path, 'train.txt'))
         #self.n_samples = len(self.samples)
