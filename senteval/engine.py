@@ -37,7 +37,7 @@ class SE(object):
         self.batcher = batcher
         self.prepare = prepare if prepare else lambda x, y: None
 
-        self.list_tasks = ['BioC','CitationSA','ClinicalSA','BIOC','CHEMPROT','PICO','PUBMED20K','MEDNLI', 'RQE','STSBenchmark','ClinicalSTS','ClinicalSTS2','BIOSSES']
+        self.list_tasks = ['BioC','CitationSA','ClinicalSA','BioASQ','PICO','PUBMED20K','RQE','ClinicalSTS','BIOSSES','MEDNLI']
                        
 
     def eval(self, name):
