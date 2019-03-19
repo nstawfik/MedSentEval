@@ -51,7 +51,7 @@ params_senteval['classifier'] ={'nhid': nhid, 'optim': 'adam','batch_size': 64, 
 #    'Set MODEL and GloVe PATHs'
 
 # import senteval
-sys.path.insert(0, PATH_SENTEVAL)
+sys.path.insert(0, PATH_TO_SENTEVAL)
 import senteval
 
 
