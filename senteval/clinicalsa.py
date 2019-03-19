@@ -19,8 +19,9 @@ from senteval.tools.validation import InnerKFoldClassifier
 
 
 class ClinicalSAEval(object):
-    logging.info('***** Transfer task :Vaccination Tweets Sentiment Analysis *****\n\n')
+    
     def __init__(self, task_path, seed=1111):
+        logging.info('***** Transfer task :Vaccination Tweets Sentiment Analysis *****\n\n')
         self.seed = seed
         self.data = self.loadFile(os.path.join(task_path, 'train.txt'))
         #self.n_samples = len(self.samples)
