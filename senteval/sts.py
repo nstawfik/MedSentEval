@@ -5,10 +5,7 @@
 # LICENSE file in the root directory of this source tree.
 #
 
-'''
-STS-{2012,2013,2014,2015,2016} (unsupervised) and
-STS-benchmark (supervised) tasks
-'''
+
 
 from __future__ import absolute_import, division, unicode_literals
 
@@ -90,31 +87,7 @@ class STSEval(object):
         return results
 
 
-class STS12Eval(STSEval):
-    def __init__(self, taskpath, seed=1111):
-        logging.debug('***** Transfer task : STS12 *****\n\n')
-        self.seed = seed
-        self.datasets = ['MSRpar', 'MSRvid', 'SMTeuroparl',
-                         'surprise.OnWN', 'surprise.SMTnews']
-        self.loadFile(taskpath)
 
-
-class STS13Eval(STSEval):
-    # STS13 here does not contain the "SMT" subtask due to LICENSE issue
-    def __init__(self, taskpath, seed=1111):
-        logging.debug('***** Transfer task : STS13 (-SMT) *****\n\n')
-        self.seed = seed
-        self.datasets = ['FNWN', 'headlines', 'OnWN']
-        self.loadFile(taskpath)
-
-
-class STS14Eval(STSEval):
-    def __init__(self, taskpath, seed=1111):
-        logging.debug('***** Transfer task : STS14 *****\n\n')
-        self.seed = seed
-        self.datasets = ['deft-forum', 'deft-news', 'headlines',
-                         'images', 'OnWN', 'tweet-news','clinical-STS','BIOSSES']
-        self.loadFile(taskpath)
 
 class ClinicalSTSEval(STSEval):
     def __init__(self, taskpath, seed=1111):
@@ -130,45 +103,3 @@ class BIOSSESEval(STSEval):
         self.datasets = ['BIOSSES']
         self.loadFile(taskpath)
 
-class CLINICALSTS(SICKRelatednessEval):
-    def __init__(self, task_path, seed=1111):
-        logging.debug('\n\n***** Transfer task : STSBenchmark*****\n\n')
-        self.seed = seed
-        train = self.loadFile(os.path.join(task_path, 'sts-train.csv'))
-        dev = self.loadFile(os.path.join(task_path, 'sts-dev.csv'))
-        test = self.loadFile(os.path.join(task_path, 'sts-test.csv'))
-        self.sick_data = {'train': train, 'dev': dev, 'test': test}
-
-    def loadFile(self, fpath):
-        sick_data = {'X_A': [], 'X_B': [], 'y': []}
-        with io.open(fpath, 'r', encoding='utf-8') as f:
-            for line in f:
-                text = line.strip().split('\t')
-                sick_data['X_A'].append(text[5].split())
-                sick_data['X_B'].append(text[6].split())
-                sick_data['y'].append(text[4])
-
-        sick_data['y'] = [float(s) for s in sick_data['y']]
-        return sick_data
-
-
-class STSBenchmarkEval(SICKRelatednessEval):
-    def __init__(self, task_path, seed=1111):
-        logging.debug('\n\n***** Transfer task : STSBenchmark*****\n\n')
-        self.seed = seed
-        train = self.loadFile(os.path.join(task_path, 'sts-train.csv'))
-        dev = self.loadFile(os.path.join(task_path, 'sts-dev.csv'))
-        test = self.loadFile(os.path.join(task_path, 'sts-test.csv'))
-        self.sick_data = {'train': train, 'dev': dev, 'test': test}
-
-    def loadFile(self, fpath):
-        sick_data = {'X_A': [], 'X_B': [], 'y': []}
-        with io.open(fpath, 'r', encoding='utf-8') as f:
-            for line in f:
-                text = line.strip().split('\t')
-                sick_data['X_A'].append(text[5].split())
-                sick_data['X_B'].append(text[6].split())
-                sick_data['y'].append(text[4])
-
-        sick_data['y'] = [float(s) for s in sick_data['y']]
-        return sick_data
