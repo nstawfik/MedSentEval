@@ -66,7 +66,7 @@ class SE(object):
         elif name == 'PICO':
             self.evaluation = PICOEval(tpath + '/PICO', seed=self.params.seed)
         elif name == 'BioASQ':
-            self.evaluation = CHEMPROTEval(tpath + '/CHEMPROT', seed=self.params.seed)
+            self.evaluation = BioASQEval(tpath + '/CHEMPROT', seed=self.params.seed)
         elif name=='ClinicalSTS':
             self.evaluation = ClinicalSTSEval(tpath + '/ClinicalSTS', seed=self.params.seed)
         elif name=='BIOSSES':
