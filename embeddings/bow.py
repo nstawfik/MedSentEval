@@ -26,7 +26,7 @@ params, _ = parser.parse_known_args()
 PATH_TO_SENTEVAL = '../'
 PATH_TO_DATA = params.data_path
 PATH_TO_VEC =  params.embedding_path
-params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': 10}
+params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': params.folds}
 
 # Set up logger
 logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
