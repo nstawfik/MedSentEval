@@ -27,12 +27,11 @@ params, _ = parser.parse_known_args()
 # Set PATHs
 PATH_TO_SENTEVAL = '../'
 PATH_TO_DATA = params.data_path
-PATH_TO_VEC =  params.embedding_path
 params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': params.folds}
 
 # Set up logger
 logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
-logging.info("-------------------------------------GOOGLE USE MODEL-------------------------------------"+"\nPATH_TO_DATA: " + str(PATH_TO_DATA) +"\nPATH_TO_VEC: "+ str(PATH_TO_VEC)+"\nTASKS: "+ str(params.tasks))
+logging.info("-------------------------------------GOOGLE USE MODEL-------------------------------------"+"\nPATH_TO_DATA: " + str(PATH_TO_DATA) +"\nTASKS: "+ str(params.tasks))
 
 
 nhid=params.nhid
