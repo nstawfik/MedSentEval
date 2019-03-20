@@ -44,7 +44,7 @@ import senteval
 # Set params for SentEval
 # we use logistic regression (usepytorch: Fasle) and kfold 10
 # In this dictionary you can add extra information that you model needs for initialization
-params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': params.fold}
+params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': params.folds}
 
 
 f=[]
