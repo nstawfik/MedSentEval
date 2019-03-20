@@ -22,7 +22,7 @@ import argparse
 parser = argparse.ArgumentParser(description='Flair Embeddings')
 
 parser.add_argument("--data_path", type=str, default='./data', help="Path to data (default ./data)")
-parser.add_argument('--embeddings', '-flair', nargs='+', default=['mix-forward', 'mix-backward'],help="Flair models to be used default ('mix-forward', 'mix-backward')
+parser.add_argument('--embeddings', '-flair', nargs='+', default=['mix-forward', 'mix-backward'],help="Flair models to be used default ('mix-forward', 'mix-backward'))
 parser.add_argument("--nhid", type=int, default=0, help="number of hidden layers: 0 for Logistic Regression or >0 for MLP (default 0)")
 parser.add_argument('--tasks', nargs='+', default= ['BioC','CitationSA','ClinicalSA','BioASQ','PICO','PUBMED20K','RQE','ClinicalSTS','BIOSSES','MEDNLI'] ,help="Bio Tasks to evaluate (default ALL TASKS)")
 parser.add_argument("--folds", type=int, default=10, help="number of k-folds for cross validations(default 10)")
