@@ -7,16 +7,12 @@ import sklearn
 import torch
 import keras
 import os
-#from allennlp.commands.elmo import ElmoEmbedder
+
 import random
 import flair
 from flair.data import Sentence
 from flair.embeddings import FlairEmbeddings
 from flair.embeddings import DocumentPoolEmbeddings
-from flair.embeddings import WordEmbeddings
-from flair.embeddings import WordEmbeddings
-from flair.embeddings import ELMoEmbeddings
-from flair.embeddings import BertEmbeddings
 import argparse
 
 parser = argparse.ArgumentParser(description='Flair Embeddings')
@@ -29,7 +25,6 @@ parser.add_argument("--folds", type=int, default=10, help="number of k-folds for
 params, _ = parser.parse_known_args()
 
 print(params)
-flair.logging.set_verbosity(0)
 
 # Set up logger
 logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
