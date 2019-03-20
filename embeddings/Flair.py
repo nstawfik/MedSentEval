@@ -33,7 +33,7 @@ PATH_TO_DATA = params.data_path
 
 # Set up logger
 logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
-logging.info("-------------------------------------FLAIR MODEL-------------------------------------"+"\nPATH_TO_DATA: " + str(PATH_TO_DATA) +"\nPATH_TO_VEC: "+ str(PATH_TO_VEC)+"\nTASKS: "+ str(params.tasks))
+logging.info("-------------------------------------FLAIR MODEL-------------------------------------"+"\nPATH_TO_DATA: " + str(PATH_TO_DATA) +"\nFlair model: "+ str(params.embeddings)+"\nTASKS: "+ str(params.tasks))
 
 
 
