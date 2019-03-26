@@ -62,7 +62,7 @@ class SE(object):
         elif name == 'CitationSA':
             self.evaluation = CitationSAEval(tpath + '/CitationSA', seed=self.params.seed) 
         elif name == 'PUBMED20K':
-            self.evaluation = PUBMED20KEval(tpath + '/ PUBMED20K', seed=self.params.seed)
+            self.evaluation = PUBMED20KEval(tpath + '/PUBMED20K', seed=self.params.seed)
         elif name == 'PICO':
             self.evaluation = PICOEval(tpath + '/PICO', seed=self.params.seed)
         elif name == 'BioASQ':
