@@ -20,9 +20,9 @@ import numpy as np
 from senteval.tools.validation import SplitClassifier
 
 
-class RCT20KEval(object):
+class PUBMED20KEval(object):
     def __init__(self, task_path, seed=1111):
-        logging.info('***** Transfer task : PUBMED 20K *****\n\n')
+        logging.info('***** Transfer task : PUBMED-RCT 20K *****\n\n')
         self.seed = seed
         self.train = self.loadFile(os.path.join(task_path, 'train.txt'))
         self.test = self.loadFile(os.path.join(task_path, 'test.txt'))
