@@ -8,7 +8,7 @@ from __future__ import absolute_import, division, unicode_literals
 from senteval import utils
 from senteval.snli import SNLIEval
 from senteval.rqe import RQEEval
-from senteval.pubmed20k import PUBMED0KEval
+from senteval.pubmed20k import PUBMED20KEval
 from senteval.bioc import BIOCEval
 from senteval.pico import PICOEval
 from senteval.clinicalsa import ClinicalSAEval
