@@ -75,8 +75,10 @@ def get_wordvec(path_to_vec, word2id):
         # if word2vec or fasttext file : skip first line "next(f)"
         for line in f:
             word, vec = line.split(' ', 1)
+            print(word,vec)
             if word in word2id:
                 word_vec[word] = np.fromstring(vec, sep=' ')
+                print(word_vec)
 
     logging.info('Found {0} words with word vectors, out of \
         {1} words'.format(len(word_vec), len(word2id)))
