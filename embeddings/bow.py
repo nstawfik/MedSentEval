@@ -129,12 +129,13 @@ def batcher(params, batch):
         for word in sent:
             if word in params.word_vec:
                 sentvec.append(params.word_vec[word])
-                print(len(params.word_vec[word]))
         if not sentvec:
             vec = np.zeros(params.wvec_dim)
             sentvec.append(vec)
         sentvec = np.mean(sentvec, 0)
         embeddings.append(sentvec)
+        for i in embeddings:
+            print(i.shape)
 
     embeddings = np.vstack(embeddings)
     return embeddings
