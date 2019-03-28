@@ -82,8 +82,6 @@ def get_wordvec(path_to_vec, word2id):
         if not vocab:
             raise Exception("vocab must be specified for GloVe embeddings")
 
-         words, vectors= [], []
-
     # get the embedding vocabulary
         if type(vocab) is str:
             h = codecs.open(vocab, 'r', 'utf-8')
