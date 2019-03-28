@@ -84,11 +84,11 @@ def get_wordvec(path_to_vec, word2id):
             raise Exception("vocab must be specified for GloVe embeddings")
 
     # get the embedding vocabulary
-        if type(vocab) is str:
-            h = codecs.open(vocab, 'r', 'utf-8')
-            for line in h:
-                vocab_words.append(line.strip().split()[0])
-                h.close()
+        
+         h = codecs.open(vocab, 'r', 'utf-8')
+         for line in h:
+            vocab_words.append(line.strip().split()[0])
+            h.close()
         else:
             vocab_words = vocab.copy()
     # set up for parsing the stored numbers
