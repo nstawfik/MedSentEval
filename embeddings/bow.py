@@ -105,19 +105,20 @@ def get_wordvec(path_to_vec, word2id):
                 word, vec = line.split(' ', 1)
             if word in word2id:
                 word_vec[word] = np.fromstring(vec, sep=' ')
+               
            
                      
-
+    word_vec_length=len(vec)
     logging.info('Found {0} words with word vectors, out of \
         {1} words'.format(len(word_vec), len(word2id)))
-    return word_vec
+    
+    return word_vec,word_vec_length
 
 
 # SentEval prepare and batcher
 def prepare(params, samples):
     _, params.word2id = create_dictionary(samples)
-    params.word_vec = get_wordvec(PATH_TO_VEC, params.word2id)
-    params.wvec_dim = 300
+    params.word_vec,params.wvec_dim = get_wordvec(PATH_TO_VEC, params.word2id)
     return
 
 def batcher(params, batch):
@@ -130,7 +131,7 @@ def batcher(params, batch):
             if word in params.word_vec:
                 sentvec.append(params.word_vec[word])
         if not sentvec:
-            vec = np.zeros(len(word_vec[word]))
+            vec = np.zeros(params.wvec_dim)
             sentvec.append(vec)
         sentvec = np.mean(sentvec, 0)
         embeddings.append(sentvec)
