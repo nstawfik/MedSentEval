@@ -130,7 +130,7 @@ def batcher(params, batch):
             if word in params.word_vec:
                 sentvec.append(params.word_vec[word])
         if not sentvec:
-            vec = np.zeros(len(word_vec[word])))
+            vec = np.zeros(len(word_vec[word]))
             sentvec.append(vec)
         sentvec = np.mean(sentvec, 0)
         embeddings.append(sentvec)
