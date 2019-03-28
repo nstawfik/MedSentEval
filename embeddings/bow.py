@@ -102,8 +102,9 @@ def get_wordvec(path_to_vec, word2id):
         with io.open(path_to_vec, 'r', encoding='utf-8') as f:
         # if word2vec or fasttext file : skip first line "next(f)"
             for line in f:
-                print(line)
+                
                 word, vec = line.split(' ', 1)
+                print(word,vec)
             if word in word2id:
                 print(word,vec)
                 word_vec[word] = np.fromstring(vec, sep=' ')
