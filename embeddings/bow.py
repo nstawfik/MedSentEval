@@ -82,13 +82,10 @@ def get_wordvec(path_to_vec, word2id):
         vocab='/content/gdrive/My Drive/MedSentEval/models/glove/PubMed_Glove_vocab'
         if not vocab:
             raise Exception("vocab must be specified for GloVe embeddings")
-
-    # get the embedding vocabulary
-        
-         h = codecs.open(vocab, 'r', 'utf-8')
-         for line in h:
+        h = codecs.open(vocab, 'r', 'utf-8')
+        for line in h:
             vocab_words.append(line.strip().split()[0])
-            h.close()
+        h.close()
         else:
             vocab_words = vocab.copy()
     # set up for parsing the stored numbers
