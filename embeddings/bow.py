@@ -12,6 +12,7 @@ import io
 import numpy as np
 import logging
 import argparse
+import codecs
 
 parser = argparse.ArgumentParser(description='Flair Embeddings')
 
@@ -72,10 +73,6 @@ def getFileSize(inf):
     file_size = inf.tell()
     inf.seek(curIx)
     return file_size
-
-import codecs
-
-
 # Get word vectors from vocabulary (glove, word2vec, fasttext ..)
 def get_wordvec(path_to_vec, word2id):
     word_vec = {}
