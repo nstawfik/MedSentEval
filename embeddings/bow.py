@@ -96,7 +96,7 @@ def get_wordvec(path_to_vec, word2id):
         dim = int((float(file_size) / (real_size * len(words))) / 2)
         for i in range(len(words)):
             print(inf.readline)
-            word, vec = words[i],array.array( 'd',inf.read(dim*2*real_size)))
+            word, vec = words[i],array.array( 'd',inf.read(dim*2*real_size))
             if word in word2id:
                 word_vec[word] = np.asarray(vec)
                 #print(word_vec)
