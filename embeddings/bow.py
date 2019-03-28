@@ -13,6 +13,7 @@ import numpy as np
 import logging
 import argparse
 import codecs
+import array
 
 parser = argparse.ArgumentParser(description='Flair Embeddings')
 
