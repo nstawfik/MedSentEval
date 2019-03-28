@@ -77,6 +77,7 @@ def getFileSize(inf):
 def get_wordvec(path_to_vec, word2id):
     word_vec = {}
     if path_to_vec.endswith('.bin'):
+        vocab_words=[]
         inf = open(path_to_vec, 'rb')
         vocab='/content/gdrive/My Drive/MedSentEval/models/glove/PubMed_Glove_vocab'
         if not vocab:
