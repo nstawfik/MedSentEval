@@ -86,17 +86,17 @@ def get_wordvec(path_to_vec, word2id):
         if type(vocab) is str:
             h = codecs.open(vocab, 'r', 'utf-8')
             for line in h:
-                words.append(line.strip().split()[0])
+                vocab_words.append(line.strip().split()[0])
                 h.close()
         else:
-            words = vocab.copy()
+            vocab_words = vocab.copy()
     # set up for parsing the stored numbers
         real_size = 8  # default double precision
         file_size = getFileSize(inf)
-        dim = int((float(file_size) / (real_size * len(words))) / 2)
-        for i in range(len(words)):
+        dim = int((float(file_size) / (real_size * len(vocab_words))) / 2)
+        for i in range(len(vocab_words)):
             print(inf.readline)
-            word, vec = words[i],array.array( 'd',inf.read(dim*2*real_size))
+            word, vec = vocab_words[i],array.array( 'd',inf.read(dim*2*real_size))
             if word in word2id:
                 word_vec[word] = np.asarray(vec)
                 #print(word_vec)
