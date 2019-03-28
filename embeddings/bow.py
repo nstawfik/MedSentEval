@@ -86,8 +86,7 @@ def get_wordvec(path_to_vec, word2id):
         for line in h:
             vocab_words.append(line.strip().split()[0])
         h.close()
-        else:
-            vocab_words = vocab.copy()
+        
     # set up for parsing the stored numbers
         real_size = 8  # default double precision
         file_size = getFileSize(inf)
