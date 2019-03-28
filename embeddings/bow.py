@@ -66,19 +66,55 @@ def create_dictionary(sentences, threshold=0):
         word2id[w] = i
 
     return id2word, word2id
+def getFileSize(inf):
+    curIx = inf.tell()
+    inf.seek(0, 2)  # jump to end of file
+    file_size = inf.tell()
+    inf.seek(curIx)
+    return file_size
+
+import codecs
+
 
 # Get word vectors from vocabulary (glove, word2vec, fasttext ..)
 def get_wordvec(path_to_vec, word2id):
     word_vec = {}
+    if path_to_vec.endswith('.bin'):
+        inf = open(path_to_vec, 'rb')
+        vocab='/content/gdrive/My Drive/MedSentEval/models/glove/PubMed_Glove_vocab'
+        if not vocab:
+            raise Exception("vocab must be specified for GloVe embeddings")
 
-    with io.open(path_to_vec, 'r', encoding='utf-8') as f:
+         words, vectors= [], []
+
+    # get the embedding vocabulary
+        if type(vocab) is str:
+            h = codecs.open(vocab, 'r', 'utf-8')
+            for line in h:
+                words.append(line.strip().split()[0])
+                h.close()
+        else:
+            words = vocab.copy()
+    # set up for parsing the stored numbers
+        real_size = 8  # default double precision
+        file_size = getFileSize(inf)
+        dim = int((float(file_size) / (real_size * len(words))) / 2)
+        for i in range(len(words)):
+            print(inf.readline)
+            word, vec = words[i],array.array( 'd',inf.read(dim*2*real_size)))
+            if word in word2id:
+                word_vec[word] = np.asarray(vec)
+                #print(word_vec)
+        inf.close()
+    else:
+        with io.open(path_to_vec, 'r', encoding='utf-8') as f:
         # if word2vec or fasttext file : skip first line "next(f)"
         for line in f:
             word, vec = line.split(' ', 1)
-            print(word,vec)
             if word in word2id:
                 word_vec[word] = np.fromstring(vec, sep=' ')
-                print(word_vec)
+           
+                     
 
     logging.info('Found {0} words with word vectors, out of \
         {1} words'.format(len(word_vec), len(word2id)))
