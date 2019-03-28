@@ -12,8 +12,6 @@ import io
 import numpy as np
 import logging
 import argparse
-import codecs
-import array
 
 parser = argparse.ArgumentParser(description='Flair Embeddings')
 
@@ -68,60 +66,30 @@ def create_dictionary(sentences, threshold=0):
         word2id[w] = i
 
     return id2word, word2id
-def getFileSize(inf):
-    curIx = inf.tell()
-    inf.seek(0, 2)  # jump to end of file
-    file_size = inf.tell()
-    inf.seek(curIx)
-    return file_size
+
 # Get word vectors from vocabulary (glove, word2vec, fasttext ..)
 def get_wordvec(path_to_vec, word2id):
     word_vec = {}
-    if path_to_vec.endswith('.bin'):
-        vocab_words=[]
-        inf = open(path_to_vec, 'rb')
-        vocab='/content/gdrive/My Drive/MedSentEval/models/glove/PubMed_Glove_vocab'
-        if not vocab:
-            raise Exception("vocab must be specified for GloVe embeddings")
-        h = codecs.open(vocab, 'r', 'utf-8')
-        for line in h:
-            vocab_words.append(line.strip().split()[0])
-        h.close()
-        
-    # set up for parsing the stored numbers
-        real_size = 8  # default double precision
-        file_size = getFileSize(inf)
-        dim = int((float(file_size) / (real_size * len(vocab_words))) / 2)
-        for i in range(len(vocab_words)):
-            word, vec = vocab_words[i],array.array( 'd',inf.read(dim*2*real_size))
-            if word in word2id:
-                word_vec[word] = np.asarray(vec)
-                #print(word_vec)
-        inf.close()
-    else:
-        with io.open(path_to_vec, 'r', encoding='utf-8') as f:
+
+    with io.open(path_to_vec, 'r', encoding='utf-8') as f:
         # if word2vec or fasttext file : skip first line "next(f)"
-            for line in f:
-                word, vec = line.split(' ', 1)
-            print(word2id)
+        for line in f:
+            word, vec = line.split(' ', 1)
+            #print(word,vec)
             if word in word2id:
-                print(word,vec)
                 word_vec[word] = np.fromstring(vec, sep=' ')
-                
-               
-           
-                     
-    word_vec_length=len(vec)
+                #print(word_vec)
+
     logging.info('Found {0} words with word vectors, out of \
         {1} words'.format(len(word_vec), len(word2id)))
-    
-    return word_vec,word_vec_length
+    return word_vec
 
 
 # SentEval prepare and batcher
 def prepare(params, samples):
     _, params.word2id = create_dictionary(samples)
-    params.word_vec,params.wvec_dim = get_wordvec(PATH_TO_VEC, params.word2id)
+    params.word_vec = get_wordvec(PATH_TO_VEC, params.word2id)
+    params.wvec_dim = 300
     return
 
 def batcher(params, batch):
@@ -138,7 +106,6 @@ def batcher(params, batch):
             sentvec.append(vec)
         sentvec = np.mean(sentvec, 0)
         embeddings.append(sentvec)
-        
 
     embeddings = np.vstack(embeddings)
     return embeddings
