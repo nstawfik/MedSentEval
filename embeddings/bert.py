@@ -30,15 +30,17 @@ params, _ = parser.parse_known_args()
 
 print(params)
 
+# Set PATHs
+PATH_TO_SENTEVAL = '../'
+PATH_TO_DATA = params.data_path
+
 # Set up logger
 logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
 logging.info("-------------------------------------BERT MODEL-------------------------------------"+"\nPATH_TO_DATA: " + str(PATH_TO_DATA) +"\nPATH_TO_VEC: "+ str(PATH_TO_VEC)+"\nTASKS: "+ str(params.tasks))
 
 
 
-# Set PATHs
-PATH_TO_SENTEVAL = '../'
-PATH_TO_DATA = params.data_path
+
 
 
 # import senteval
