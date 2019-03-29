@@ -36,7 +36,7 @@ PATH_TO_DATA = params.data_path
 
 # Set up logger
 logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
-logging.info("-------------------------------------BERT MODEL-------------------------------------"+"\nPATH_TO_DATA: " + str(PATH_TO_DATA) +"\nPATH_TO_VEC: "+ str(PATH_TO_VEC)+"\nTASKS: "+ str(params.tasks))
+logging.info("-------------------------------------BERT MODEL-------------------------------------"+"\nPATH_TO_DATA: " + str(PATH_TO_DATA) +"\nMODEL: "+ str(params.model)+"\nTASKS: "+ str(params.tasks))
 
 
 
@@ -54,7 +54,7 @@ params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': param
 
 
 f=[]
-for i in params.embeddings:
+for i in params.model:
   f.append(BertEmbeddings(i))
   #f.append(eval(i))
 flair_encoder = DocumentPoolEmbeddings(f)
