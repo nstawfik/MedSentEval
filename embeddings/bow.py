@@ -76,21 +76,19 @@ def get_wordvec(path_to_vec, word2id):
         # if word2vec or fasttext file : skip first line "next(f)"
         for line in f:
             word, vec = line.split(' ', 1)
-            #print(word,vec)
             if word in word2id:
                 word_vec[word] = np.fromstring(vec, sep=' ')
-                #print(word_vec)
-    wvec_dim=len(vec)
+
     logging.info('Found {0} words with word vectors, out of \
         {1} words'.format(len(word_vec), len(word2id)))
-    return word_vec,wvec_dim
+    return word_vec
 
 
 # SentEval prepare and batcher
 def prepare(params, samples):
     _, params.word2id = create_dictionary(samples)
-    params.word_vec= get_wordvec(PATH_TO_VEC, params.word2id)
-    params.wvec_dim = dim
+    params.word_vec = get_wordvec(PATH_TO_VEC, params.word2id)
+    params.wvec_dim = 300
     return
 
 def batcher(params, batch):
@@ -103,7 +101,6 @@ def batcher(params, batch):
             if word in params.word_vec:
                 sentvec.append(params.word_vec[word])
         if not sentvec:
-            print(params.wvec_dim)
             vec = np.zeros(params.wvec_dim)
             sentvec.append(vec)
         sentvec = np.mean(sentvec, 0)
@@ -112,6 +109,14 @@ def batcher(params, batch):
     embeddings = np.vstack(embeddings)
     return embeddings
 
+
+# Set params for SentEval
+params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': 5}
+params_senteval['classifier'] = {'nhid': 0, 'optim': 'rmsprop', 'batch_size': 128,
+                                 'tenacity': 3, 'epoch_size': 2}
+
+# Set up logger
+logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
 
 # Set up logger
 if __name__ == "__main__":
