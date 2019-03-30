@@ -103,6 +103,7 @@ def batcher(params, batch):
             if word in params.word_vec:
                 sentvec.append(params.word_vec[word])
         if not sentvec:
+            print(params.wvec_dim)
             vec = np.zeros(params.wvec_dim)
             sentvec.append(vec)
         sentvec = np.mean(sentvec, 0)
