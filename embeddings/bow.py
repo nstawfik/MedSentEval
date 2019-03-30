@@ -20,6 +20,7 @@ parser.add_argument('--embedding_path', type=str, default= './embeddings/glove/g
 parser.add_argument("--nhid", type=int, default=0, help="number of hidden layers: 0 for Logistic Regression or >0 for MLP (default 0)")
 parser.add_argument('--tasks', nargs='+', default= ['BioC','CitationSA','ClinicalSA','BioASQ','PICO','PUBMED20K','RQE','ClinicalSTS','BIOSSES','MEDNLI'] ,help="Bio Tasks to evaluate (default ALL TASKS)")
 parser.add_argument("--folds", type=int, default=10, help="number of k-folds for cross validations(default 10)")
+parser.add_argument("--dim", type=int, default=300, help="Embedding dimension (default 300)")
 
 params, _ = parser.parse_known_args()
 # Set PATHs
@@ -32,7 +33,7 @@ params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': param
 logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
 logging.info("-------------------------------------BOW MODEL-------------------------------------"+"\nPATH_TO_DATA: " + str(PATH_TO_DATA) +"\nPATH_TO_VEC: "+ str(PATH_TO_VEC)+"\nTASKS: "+ str(params.tasks))
 
-
+dim=params.dim
 nhid=params.nhid
 params_senteval['classifier'] ={'nhid': nhid, 'optim': 'adam','batch_size': 64, 'tenacity': 5,'epoch_size': 4}
 
@@ -88,8 +89,8 @@ def get_wordvec(path_to_vec, word2id):
 # SentEval prepare and batcher
 def prepare(params, samples):
     _, params.word2id = create_dictionary(samples)
-    params.word_vec,params.wvec_dim = get_wordvec(PATH_TO_VEC, params.word2id)
-    #params.wvec_dim = 300
+    params.word_vec= get_wordvec(PATH_TO_VEC, params.word2id)
+    params.wvec_dim = dim
     return
 
 def batcher(params, batch):
