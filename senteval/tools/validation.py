@@ -99,12 +99,16 @@ class InnerKFoldClassifier(object):
             else:
                 clf = LogisticRegression(C=optreg, random_state=self.seed)
                 clf.fit(X_train, y_train)
-
+            
+            yhat = clf.predict(X_test)
+            self.f1results.append(round(100*f1_score(yhat,y_test), 2)
             self.testresults.append(round(100*clf.score(X_test, y_test), 2))
-
+            
+        
         devaccuracy = round(np.mean(self.devresults), 2)
         testaccuracy = round(np.mean(self.testresults), 2)
-        return devaccuracy, testaccuracy
+        testf1=round(np.mean(self.f1results), 2)
+        return devaccuracy, testaccuracy, testf1
 
 
 class KFoldClassifier(object):
