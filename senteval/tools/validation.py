@@ -48,6 +48,7 @@ class InnerKFoldClassifier(object):
         self.seed = config['seed']
         self.devresults = []
         self.testresults = []
+        self.f1results=[]
         self.usepytorch = config['usepytorch']
         self.classifier_config = config['classifier']
         self.modelname = get_classif_name(self.classifier_config, self.usepytorch)
