@@ -76,7 +76,7 @@ def get_wordvec(path_to_vec, word2id):
         # if word2vec or fasttext file : skip first line "next(f)"
         for line in f:
             word, vec = line.split(' ', 1)
-            print(np.fromstring(vec, sep=' ').shape, len(np.fromstring(vec, sep=' ')))
+            #print(np.fromstring(vec, sep=' ').shape, len(np.fromstring(vec, sep=' ')))
             if word in word2id:
                 word_vec[word] = np.fromstring(vec, sep=' ')
 
