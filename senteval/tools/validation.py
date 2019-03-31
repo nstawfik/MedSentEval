@@ -23,6 +23,7 @@ assert(sklearn.__version__ >= "0.18.0"), \
     "need to update sklearn to version >= 0.18.0"
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedKFold
+from sklearn.metrics import f1_score
 
 
 def get_classif_name(classifier_config, usepytorch):
