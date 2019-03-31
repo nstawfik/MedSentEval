@@ -83,7 +83,7 @@ class BIOCEval(object):
                   'classifier': params.classifier,
                   'nhid': params.nhid, 'kfold': params.kfold}
         clf = InnerKFoldClassifier(trainQC, trainY, config)
-        #devacc, testacc = clf.run()
+        devacc, testacc = clf.run()
         
         logging.debug('Dev acc : {0} Test acc : {1}\n for BioC '.format(devacc, testacc))
         return {'devacc': devacc, 'acc': testacc}
