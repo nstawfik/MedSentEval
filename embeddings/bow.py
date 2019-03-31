@@ -84,7 +84,7 @@ def get_wordvec(path_to_vec, word2id):
         {1} words'.format(len(word_vec), len(word2id)))
     
     wvec_dim=(len( np.fromstring(vec, sep=' ')))
-    print(wvec_dim)
+    #print(wvec_dim)
     #print(word_vec)
     return word_vec,wvec_dim
 
@@ -93,7 +93,7 @@ def get_wordvec(path_to_vec, word2id):
 def prepare(params, samples):
     _, params.word2id = create_dictionary(samples)
     params.word_vec,params.wvec_dim = get_wordvec(PATH_TO_VEC, params.word2id)
-    print(params.wvec_dim)
+    #print(params.wvec_dim)
     #params.wvec_dim= 300
     return
 
