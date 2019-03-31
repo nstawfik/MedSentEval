@@ -54,6 +54,7 @@ class InnerKFoldClassifier(object):
         self.classifier_config = config['classifier']
         self.modelname = get_classif_name(self.classifier_config, self.usepytorch)
         
+    self.k = 5 if 'kfold' not in config else config['kfold']    
 
     def run(self):
         logging.info('Training {0} with (inner) {1}-fold cross-validation'
