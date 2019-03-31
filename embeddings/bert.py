@@ -11,11 +11,7 @@ import os
 import random
 import flair
 from flair.data import Sentence
-from flair.embeddings import FlairEmbeddings
 from flair.embeddings import DocumentPoolEmbeddings
-from flair.embeddings import WordEmbeddings
-from flair.embeddings import WordEmbeddings
-from flair.embeddings import ELMoEmbeddings
 from flair.embeddings import BertEmbeddings
 import argparse
 
@@ -53,13 +49,13 @@ import senteval
 params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': params.folds}
 
 
-f=[]
+b=[]
 for i in params.model:
-  f.append(BertEmbeddings(i))
+  b.append(BertEmbeddings(i))
   #f.append(eval(i))
-flair_encoder = DocumentPoolEmbeddings(f)
-params_senteval['flair'] = flair_encoder
-print(params_senteval['flair'])
+bert_encoder = DocumentPoolEmbeddings(b)
+params_senteval['bert'] = bert_encoder
+print(params_senteval['bert'])
 
 nhid=params.nhid
 params_senteval['classifier'] ={'nhid': nhid, 'optim': 'adam','batch_size': 64, 'tenacity': 5,'epoch_size': 4}
@@ -82,11 +78,12 @@ def batcher(params, batch):
       sentence = Sentence(' '.join(w for w in sent))
       sentences.append(sentence)
       
-    #print(batch)
-    params_senteval['flair'].embed(sentences)
-    #flair_encoder.embed(sentences)
+    print(batch)
+    #params_senteval['flair'].embed(sentences)
+    bert_encoder.embed(sentences)
       
     for sent in  sentences: 
+        print(sent,sent.embedding.shape)
         embeddings.append(sent.embedding.numpy())
         
     embeddings = np.vstack(embeddings)
