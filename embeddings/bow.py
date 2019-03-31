@@ -85,7 +85,7 @@ def get_wordvec(path_to_vec, word2id):
     
     wvec_dim=(len( np.fromstring(vec, sep=' ')))
     print(wvec_dim)
-    print(word_vec)
+    #print(word_vec)
     return word_vec,wvec_dim
 
 
