@@ -104,7 +104,6 @@ def get_wordvec(path_to_vec, word2id):
             for line in f:
                 word, vec = line.split(' ', 1)
                 if word in word2id:
-                    print(word,vec)
                     word_vec[word] = np.fromstring(vec, sep=' ')
     #
     
