@@ -82,7 +82,9 @@ def get_wordvec(path_to_vec, word2id):
 
     logging.info('Found {0} words with word vectors, out of \
         {1} words'.format(len(word_vec), len(word2id)))
-    wvec_dim=(len( np.fromstring(vec, sep=' '))
+    
+    wvec_dim=(len( np.fromstring(vec, sep=' ')))
+    print(word_vec_dim)
     print(word_vec)
     return word_vec,wvec_dim
 
