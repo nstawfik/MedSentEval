@@ -1,10 +1,3 @@
-# Copyright (c) 2017-present, Facebook, Inc.
-# All rights reserved.
-#
-# This source code is licensed under the license found in the
-# LICENSE file in the root directory of this source tree.
-#
-
 from __future__ import absolute_import, division, unicode_literals
 
 import sys
@@ -12,6 +5,8 @@ import io
 import numpy as np
 import logging
 import argparse
+import codecs
+import array
 
 parser = argparse.ArgumentParser(description='Flair Embeddings')
 
@@ -68,17 +63,63 @@ def create_dictionary(sentences, threshold=0):
 
     return id2word, word2id
 
+def getFileSize(inf):
+    curIx = inf.tell()
+    inf.seek(0, 2)  # jump to end of file
+    file_size = inf.tell()
+    inf.seek(curIx)
+    return file_size
+# Get word vectors from vocabulary (glove, word2vec, fasttext ..)
+
 # Get word vectors from vocabulary (glove, word2vec, fasttext ..)
 def get_wordvec(path_to_vec, word2id):
     word_vec = {}
-
-    with io.open(path_to_vec, 'r', encoding='utf-8') as f:
-        # if word2vec or fasttext file : skip first line "next(f)"
-        for line in f:
-            word, vec = line.split(' ', 1)
-            #print(np.fromstring(vec, sep=' ').shape, len(np.fromstring(vec, sep=' ')))
+    
+    
+    #
+    if path_to_vec.endswith('.bin'):
+        vocab_words=[]
+        inf = open(path_to_vec, 'rb')
+        vocab='/content/gdrive/My Drive/MedSentEval/models/glove/PubMed_Glove_vocab'
+        if not vocab:
+            raise Exception("vocab must be specified for GloVe embeddings")
+        h = codecs.open(vocab, 'r', 'utf-8')
+        for line in h:
+            vocab_words.append(line.strip().split()[0])
+        h.close()
+        
+    # set up for parsing the stored numbers
+        real_size = 8  # default double precision
+        file_size = getFileSize(inf)
+        dim = int((float(file_size) / (real_size * len(vocab_words))) / 2)
+        for i in range(len(vocab_words)):
+            word, vec = vocab_words[i],array.array( 'd',inf.read(dim*2*real_size))
             if word in word2id:
+                word_vec[word] = np.asarray(vec)
+                #print(word_vec)
+        inf.close()
+    else:
+        with io.open(path_to_vec, 'r', encoding='utf-8') as f:
+        # if word2vec or fasttext file : skip first line "next(f)"
+            for line in f:
+                word, vec = line.split(' ', 1)
+            print(word2id)
+            if word in word2id:
+                print(word,vec)
                 word_vec[word] = np.fromstring(vec, sep=' ')
+    #
+    
+    
+
+    #with io.open(path_to_vec, 'r', encoding='utf-8') as f:
+    #    # if word2vec or fasttext file : skip first line "next(f)"
+    #    for line in f:
+    #        word, vec = line.split(' ', 1)
+    #        #print(np.fromstring(vec, sep=' ').shape, len(np.fromstring(vec, sep=' ')))
+     #       if word in word2id:
+      #          word_vec[word] = np.fromstring(vec, sep=' ')
+                
+
 
     logging.info('Found {0} words with word vectors, out of \
         {1} words'.format(len(word_vec), len(word2id)))
@@ -87,6 +128,7 @@ def get_wordvec(path_to_vec, word2id):
     #print(wvec_dim)
     #print(word_vec)
     return word_vec,wvec_dim
+
 
 
 # SentEval prepare and batcher
