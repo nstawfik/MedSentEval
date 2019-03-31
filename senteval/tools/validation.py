@@ -4,20 +4,16 @@
 # This source code is licensed under the license found in the
 # LICENSE file in the root directory of this source tree.
 #
-
 """
 Validation and classification
 (train)            :  inner-kfold classifier
 (train, test)      :  kfold classifier
 (train, dev, test) :  split classifier
-
 """
 from __future__ import absolute_import, division, unicode_literals
-
 import logging
 import numpy as np
 from senteval.tools.classifier import MLP
-
 import sklearn
 assert(sklearn.__version__ >= "0.18.0"), \
     "need to update sklearn to version >= 0.18.0"
@@ -35,7 +31,6 @@ def get_classif_name(classifier_config, usepytorch):
         bs = 64 if 'batch_size' not in classifier_config else classifier_config['batch_size']
         modelname = 'pytorch-MLP-nhid%s-%s-bs%s' % (nhid, optim, bs)
     return modelname
-
 # Pytorch version
 class InnerKFoldClassifier(object):
     """
@@ -53,13 +48,10 @@ class InnerKFoldClassifier(object):
         self.usepytorch = config['usepytorch']
         self.classifier_config = config['classifier']
         self.modelname = get_classif_name(self.classifier_config, self.usepytorch)
-        
-    self.k = 5 if 'kfold' not in config else config['kfold']    
-
+        self.k = 5 if 'kfold' not in config else config['kfold']
     def run(self):
         logging.info('Training {0} with (inner) {1}-fold cross-validation'
                      .format(self.modelname, self.k))
-
         regs = [10**t for t in range(-5, -1)] if self.usepytorch else \
                [2**t for t in range(-2, 4, 1)]
         skf = StratifiedKFold(n_splits=self.k, shuffle=True, random_state=1111)
@@ -91,12 +83,10 @@ class InnerKFoldClassifier(object):
             logging.info('Best param found at split {0}: l2reg = {1} \
                 with score {2}'.format(count, optreg, np.max(scores)))
             self.devresults.append(np.max(scores))
-
             if self.usepytorch:
                 clf = MLP(self.classifier_config, inputdim=self.featdim,
                           nclasses=self.nclasses, l2reg=optreg,
                           seed=self.seed)
-
                 clf.fit(X_train, y_train, validation_split=0.05)
             else:
                 clf = LogisticRegression(C=optreg, random_state=self.seed)
@@ -111,8 +101,6 @@ class InnerKFoldClassifier(object):
         testaccuracy = round(np.mean(self.testresults), 2)
         testf1=round(np.mean(self.f1results), 2)
         return devaccuracy, testaccuracy, testf1
-
-
 class KFoldClassifier(object):
     """
     (train, test) split classifier : cross-validation on train.
@@ -126,9 +114,7 @@ class KFoldClassifier(object):
         self.usepytorch = config['usepytorch']
         self.classifier_config = config['classifier']
         self.modelname = get_classif_name(self.classifier_config, self.usepytorch)
-
         self.k = 5 if 'kfold' not in config else config['kfold']
-
     def run(self):
         # cross-validation
         logging.info('Training {0} with {1}-fold cross-validation'
@@ -138,16 +124,13 @@ class KFoldClassifier(object):
         skf = StratifiedKFold(n_splits=self.k, shuffle=True,
                               random_state=self.seed)
         scores = []
-
         for reg in regs:
             scanscores = []
             for train_idx, test_idx in skf.split(self.train['X'],
                                                  self.train['y']):
                 # Split data
                 X_train, y_train = self.train['X'][train_idx], self.train['y'][train_idx]
-
                 X_test, y_test = self.train['X'][test_idx], self.train['y'][test_idx]
-
                 # Train classifier
                 if self.usepytorch:
                     clf = MLP(self.classifier_config, inputdim=self.featdim,
@@ -161,7 +144,6 @@ class KFoldClassifier(object):
                 scanscores.append(score)
             # Append mean score
             scores.append(round(100*np.mean(scanscores), 2))
-
         # evaluation
         logging.info([('reg:' + str(regs[idx]), scores[idx])
                       for idx in range(len(scores))])
@@ -169,7 +151,6 @@ class KFoldClassifier(object):
         devaccuracy = np.max(scores)
         logging.info('Cross-validation : best param found is reg = {0} \
             with score {1}'.format(optreg, devaccuracy))
-
         logging.info('Evaluating...')
         if self.usepytorch:
             clf = MLP(self.classifier_config, inputdim=self.featdim,
@@ -180,13 +161,9 @@ class KFoldClassifier(object):
             clf = LogisticRegression(C=optreg, random_state=self.seed)
             clf.fit(self.train['X'], self.train['y'])
         yhat = clf.predict(self.test['X'])
-
         testaccuracy = clf.score(self.test['X'], self.test['y'])
         testaccuracy = round(100*testaccuracy, 2)
-
         return devaccuracy, testaccuracy, yhat
-
-
 class SplitClassifier(object):
     """
     (train, valid, test) split classifier.
@@ -204,7 +181,6 @@ class SplitClassifier(object):
         self.modelname = get_classif_name(self.classifier_config, self.usepytorch)
         self.noreg = False if 'noreg' not in config else config['noreg']
         self.config = config
-
     def run(self):
         logging.info('Training {0} with standard validation..'
                      .format(self.modelname))
@@ -218,7 +194,6 @@ class SplitClassifier(object):
                 clf = MLP(self.classifier_config, inputdim=self.featdim,
                           nclasses=self.nclasses, l2reg=reg,
                           seed=self.seed, cudaEfficient=self.cudaEfficient)
-
                 # TODO: Find a hack for reducing nb epoches in SNLI
                 clf.fit(self.X['train'], self.y['train'],
                         validation_data=(self.X['valid'], self.y['valid']))
@@ -239,14 +214,12 @@ class SplitClassifier(object):
             clf = MLP(self.classifier_config, inputdim=self.featdim,
                       nclasses=self.nclasses, l2reg=optreg,
                       seed=self.seed, cudaEfficient=self.cudaEfficient)
-
             # TODO: Find a hack for reducing nb epoches in SNLI
             clf.fit(self.X['train'], self.y['train'],
                     validation_data=(self.X['valid'], self.y['valid']))
         else:
             clf = LogisticRegression(C=optreg, random_state=self.seed)
             clf.fit(self.X['train'], self.y['train'])
-
         testaccuracy = clf.score(self.X['test'], self.y['test'])
         testaccuracy = round(100*testaccuracy, 2)
         return devaccuracy, testaccuracy
