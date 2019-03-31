@@ -88,8 +88,8 @@ class BIOCEval(object):
         #logging.debug('Dev acc : {0} Test acc : {1}\n'.format(devacc, testacc))
         #return {'devacc': devacc, 'acc': testacc}
         
-        devacc, testacc, yhat = clf.run()
-        testf1 = round(100*f1_score(trainY, yhat), 2)
+        devacc, testacc, testf1 = clf.run()
+        #testf1 = round(100*f1_score(trainY, yhat), 2)
         logging.debug('Dev acc : {0} Test acc {1}; Test F1 {2} for BioC\n'
                       .format(devacc, testacc, testf1))
         return {'devacc': devacc, 'acc': testacc, 'f1': testf1}
