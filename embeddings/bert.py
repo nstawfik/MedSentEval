@@ -359,7 +359,7 @@ def batcher(params, batch):
     # you can change it into NULL dependening in your model
     
     batch = [sent if sent != [] else ['.'] for sent in batch]
-    print("NewBatch", len:(batch))
+    print("NewBatch", len(batch))
     embeddings = []
     examples = read_examples(batch)
     #print(examples)
