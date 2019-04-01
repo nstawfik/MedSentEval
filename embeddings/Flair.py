@@ -22,7 +22,7 @@ parser.add_argument('--embeddings', '-flair', nargs='+', default=['mix-forward',
 parser.add_argument("--nhid", type=int, default=0, help="number of hidden layers: 0 for Logistic Regression or >0 for MLP (default 0)")
 parser.add_argument('--tasks', nargs='+', default= ['BioC','CitationSA','ClinicalSA','BioASQ','PICO','PUBMED20K','RQE','ClinicalSTS','BIOSSES','MEDNLI'] ,help="Bio Tasks to evaluate (default ALL TASKS)")
 parser.add_argument("--folds", type=int, default=10, help="number of k-folds for cross validations(default 10)")
-parser.add_argument("--usepytorch", type=boolean, default=True, help="Set True for pytorch or false for scikit-learn (default True)")
+parser.add_argument("--usescikitlearn", action='store_false', default=True, help="Use scikit-learn(default cuda-pytorch)")
 params, _ = parser.parse_known_args()
 
 print(params)
@@ -45,7 +45,7 @@ import senteval
 # Set params for SentEval
 # we use logistic regression (usepytorch: Fasle) and kfold 10
 # In this dictionary you can add extra information that you model needs for initialization
-params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': params.usepytorch, 'kfold': params.folds}
+params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': params.usescikitlearn, 'kfold': params.folds}
 
 
 f=[]
