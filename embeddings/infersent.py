@@ -28,6 +28,8 @@ parser.add_argument("--nhid", type=int, default=0, help="number of hidden layers
 parser.add_argument('--tasks', nargs='+', default= ['BioC','CitationSA','ClinicalSA','BioASQ','PICO','PUBMED20K','RQE','ClinicalSTS','BIOSSES','MEDNLI'] ,help="Bio Tasks to evaluate (default ALL TASKS)")
 parser.add_argument("--folds", type=int, default=10, help="number of k-folds for cross validations(default 10)")
 parser.add_argument("--version", type=int, default=1, help="Infersent version(default 1)")
+parser.add_argument("--usepytorch", type=boolean, default=True, help="Set True for pytorch or false for scikit-learn (default True)")
+
 
 params, _ = parser.parse_known_args()
 # Set PATHs
@@ -36,7 +38,7 @@ PATH_TO_DATA = params.data_path
 PATH_TO_W2V =  params.embedding_path
 MODEL_PATH = params.model_path
 V=params.version
-params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': True, 'kfold': params.folds}
+params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': params.usepytorch, 'kfold': params.folds}
 
 # Set up logger
 logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
