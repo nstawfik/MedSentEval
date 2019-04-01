@@ -55,7 +55,7 @@ nhid=params.nhid
 sys.path.insert(0, PATH_TO_SENTEVAL)
 import senteval
 
-params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch':params.usescikitlearn, 'kfold': params.folds,'batch_size':10000} #params.folds}
+params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch':params.usescikitlearn, 'kfold': params.folds,'batch_size':100000} #params.folds}
 
 vocab_file=os.path.join(PATH_TO_BERT, 'vocab.txt')
 bert_config_file=os.path.join(PATH_TO_BERT, 'bert_config.json')
@@ -359,7 +359,7 @@ def batcher(params, batch):
     # you can change it into NULL dependening in your model
     
     batch = [sent if sent != [] else ['.'] for sent in batch]
-    print(params_senteval, len(batch))
+    print("NewBatch", len:(batch))
     embeddings = []
     examples = read_examples(batch)
     #print(examples)
