@@ -16,7 +16,7 @@ parser.add_argument("--nhid", type=int, default=0, help="number of hidden layers
 parser.add_argument('--tasks', nargs='+', default= ['BioC','CitationSA','ClinicalSA','BioASQ','PICO','PUBMED20K','RQE','ClinicalSTS','BIOSSES','MEDNLI'] ,help="Bio Tasks to evaluate (default ALL TASKS)")
 parser.add_argument("--folds", type=int, default=10, help="number of k-folds for cross validations(default 10)")
 parser.add_argument("--dim", type=int, default=300, help="Embedding dimension (default 300)")
-parser.add_argument("--usescikitlearn", action='store_false', default=True, help="Logistic regression from the scikit-learn (default Pytorch is used)")
+parser.add_argument("--usescikitlearn", action='store_false', default=True, help="Use scikit-learn(default cuda-pytorch)")
 params, _ = parser.parse_known_args()
 # Set PATHs
 PATH_TO_SENTEVAL = '../'
