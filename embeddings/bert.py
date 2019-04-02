@@ -15,8 +15,8 @@ import codecs
 import collections
 import json
 import re
-from bert import modeling
-from bert import tokenization
+from utils import modeling
+from utils import tokenization
 import tensorflow as tf
 import numpy as np
 
