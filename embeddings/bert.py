@@ -31,7 +31,7 @@ parser.add_argument('--tasks', nargs='+', default= ['BioC','CitationSA','Clinica
 parser.add_argument('--model_path', type=str, default= 'None',help="BERT Model directory (default None)")
 parser.add_argument("--folds", type=int, default=10, help="number of k-folds for cross validations(default 10)")
 parser.add_argument("--master", type=str, default=None, help="TPU address (default None)")
-parser.add_argument("--bert_batch_size", type=int, default=32, help="Bert Batch Size (default None)")
+parser.add_argument("--bert_batch_size", type=int, default=32, help="Bert Batch Size (default 32)")
 parser.add_argument("--usescikitlearn", action='store_false', default=True, help="Logistic regression from the scikit-learn (default Pytorch is used)")
 parser.add_argument("--useTPU", action='store_true', default=False, help="Logistic regression from the scikit-learn (default Pytorch is used)")
 
@@ -61,7 +61,7 @@ vocab_file=os.path.join(PATH_TO_BERT, 'vocab.txt')
 bert_config_file=os.path.join(PATH_TO_BERT, 'bert_config.json')
 init_checkpoint=os.path.join(PATH_TO_BERT, 'bert_model.ckpt')
 layers=-1
-max_seq_length=512
+max_seq_length=128
 batch_size=params.bert_batch_size
 do_lower_case=True
 use_tpu=params.useTPU
