@@ -35,8 +35,8 @@ class BioASQEval(object):
     def do_prepare(self, params, prepare):
         # TODO : Should we separate samples in "train, test"?
         samples = self.rqe_data['train']['question'] + \
-                  self.rqe_data['train']['snippet'] + \
-                  self.rqe_data['test']['questions'] + self.rqe_data['test']['snippet']
+                  self.qa_data['train']['snippet'] + \
+                  self.qa_data['test']['questions'] + self.rqe_data['test']['snippet']
         return prepare(params, samples)
 
     def loadFile(self, fpath):
