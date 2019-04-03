@@ -44,6 +44,8 @@ class BioASQEval(object):
         tgt2idx = {'no': 0, 'yes': 1}
         with io.open(fpath, 'r', encoding='utf-8') as f:
             for line in f:
+                print(line)
+                print(line.split('\t'))
                 question, snippet, label = line.strip().split('\t')
                 qa_data['question'].append(question.split(' '))
                 qa_data['snippet'].append(snippet.split(' '))
