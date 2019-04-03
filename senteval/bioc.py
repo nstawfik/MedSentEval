@@ -76,8 +76,7 @@ class BioCEval(object):
         trainQ = bioC_embed['train']['quest']
         trainC = bioC_embed['train']['claim']
         
-        #enc_input.append(np.hstack((enc1, enc2, enc1 * enc2,
-                                                np.abs(enc1 - enc2))))
+        #enc_input.append(np.hstack((enc1, enc2, enc1 * enc2,np.abs(enc1 - enc2))))
         #trainQC = np.c_[np.abs(trainQ - trainC), trainQ * trainC]
         trainQC = np.c_[trainQ, trainC, trainQ * trainC,np.abs(trainQ - trainC)]
         trainY = bioC_embed['train']['label']
