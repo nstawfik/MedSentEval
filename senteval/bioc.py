@@ -78,7 +78,7 @@ class BioCEval(object):
         
         #enc_input.append(np.hstack((enc1, enc2, enc1 * enc2,np.abs(enc1 - enc2))))
         #trainQC = np.c_[np.abs(trainQ - trainC), trainQ * trainC]
-        trainQC = np.c_[trainQ, trainC, trainQ * trainC,np.abs(trainQ - trainC)]
+        trainQC = np.hstack((trainQ, trainC, trainQ * trainC,np.abs(trainQ - trainC)))
         trainY = bioC_embed['train']['label']
 
         config = {'nclasses': 2, 'seed': self.seed,
