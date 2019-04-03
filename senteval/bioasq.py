@@ -47,7 +47,7 @@ class BioASQEval(object):
                 question, snippet, label = line.strip().split('\t')
                 qa_data['question'].append(question.split(' '))
                 qa_data['snippet'].append(snippet.split(' '))
-                qa_data['label'].append(tgt2idx[label])
+                qa_data['label'].append(tgt2idx[label].strip())
         return qa_data
 
     def run(self, params, batcher):
