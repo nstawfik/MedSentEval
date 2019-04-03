@@ -6,7 +6,7 @@
 #
 
 '''
-SNLI - Entailment
+MedNLI - Entailment
 '''
 from __future__ import absolute_import, division, unicode_literals
 
@@ -20,9 +20,9 @@ import numpy as np
 from senteval.tools.validation import SplitClassifier
 
 
-class SNLIEval(object):
+class MedNLIEval(object):
     def __init__(self, taskpath, seed=1111):
-        logging.debug('***** Transfer task : MEDNLI Entailment*****\n\n')
+        logging.debug('***** Transfer task : MedNLI Entailment*****\n\n')
         self.seed = seed
         train1 = self.loadFile(os.path.join(taskpath, 's1.train'))
         train2 = self.loadFile(os.path.join(taskpath, 's2.train'))
