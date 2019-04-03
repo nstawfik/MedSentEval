@@ -20,7 +20,7 @@ import numpy as np
 from senteval.tools.validation import SplitClassifier
 
 
-class PUBMED20KEval(object):
+class PubMed20KEval(object):
     def __init__(self, task_path, seed=1111):
         logging.info('***** Transfer task : PUBMED-RCT 20K *****\n\n')
         self.seed = seed
