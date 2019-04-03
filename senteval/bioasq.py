@@ -104,6 +104,8 @@ class BioASQEval(object):
                   'usepytorch': params.usepytorch,
                   'classifier': params.classifier,
                   'nhid': params.nhid, 'kfold': params.kfold}
+        print(trainY)
+        print(testY)
         clf = KFoldClassifier(train={'X': trainC, 'y': trainY},
                               test={'X': testC, 'y': testY}, config=config)
 
