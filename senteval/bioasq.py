@@ -41,17 +41,17 @@ class RQEEval(object):
 
     def loadFile(self, fpath):
         rqe_data = {'chq': [], 'faq': [], 'label': [],'pid':[]}
-        tgt2idx = {'false': 0, 'true': 1}
+        tgt2idx = {'no': 0, 'yes': 1}
         with io.open(fpath, 'r', encoding='utf-8') as f:
             for line in f:
                 text = line.strip().split('\t')
                 
                 try:
                   #print(text[0],"-",text[1],"-",text[2],"-",text[3])
-                  rqe_data['faq'].append(text[3].split(' '))
-                  rqe_data['chq'].append(text[2].split(' '))
-                  rqe_data['label'].append(tgt2idx[text[1]])
-                  rqe_data['pid'].append(text[0])
+                  rqe_data['faq'].append(text[0].split(' '))
+                  rqe_data['chq'].append(text[1].split(' '))
+                  rqe_data['label'].append(tgt2idx[text[2]])
+                  #rqe_data['pid'].append(text[0])
                 except:
                   pass
         return rqe_data
@@ -65,13 +65,12 @@ class RQEEval(object):
             text_data = {}
             sorted_corpus = sorted(zip(self.rqe_data[key]['chq'],
                                        self.rqe_data[key]['faq'],
-                                       self.rqe_data[key]['label'],
-                                       self.rqe_data[key]['pid']),
+                                       self.rqe_data[key]['label']),
                                    key=lambda z: (len(z[0]), len(z[1]), z[2]))
-            text_data['chq'] = [x for (x, y, z, w) in sorted_corpus]
-            text_data['faq'] = [y for (x, y, z, w) in sorted_corpus]
-            text_data['label'] = [z for (x, y, z, w ) in sorted_corpus]
-            text_data['pid'] = [w for (x, y, z, w ) in sorted_corpus]
+            text_data['chq'] = [x for (x, y, z) in sorted_corpus]
+            text_data['faq'] = [y for (x, y, z) in sorted_corpus]
+            text_data['label'] = [z for (x, y, z) in sorted_corpus]
+            #text_data['pid'] = [w for (x, y, z, w ) in sorted_corpus]
             for txt_type in ['chq', 'faq']:
                 rqe_embed[key][txt_type] = []
                 for ii in range(0, len(text_data['label']), params.batch_size):
