@@ -73,7 +73,7 @@ class BioASQEval(object):
             #text_data['pid'] = [w for (x, y, z, w ) in sorted_corpus]
             
             for txt_type in ['chq', 'faq']:
-                print(key,txt_type,rqe_embed)
+                #print(key,txt_type,rqe_embed)
                 rqe_embed[key][txt_type] = []
                 for ii in range(0, len(text_data['label']), params.batch_size):
                     batch = text_data[txt_type][ii:ii + params.batch_size]
@@ -91,7 +91,7 @@ class BioASQEval(object):
         #trainCF = np.c_[trainC, trainF,np.abs(trainC - trainF), (trainC * trainF)]
         trainCF = np.hstack((trainC, trainF, trainC * trainF,np.abs(trainC - trainF)))
         trainY = rqe_embed['train']['label']
-        print(type(tainY))
+        print(type(trainY))
 
         # Test
         testC = rqe_embed['test']['chq']
