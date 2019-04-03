@@ -97,7 +97,7 @@ class BioASQEval(object):
         testC = rqe_embed['test']['chq']
         testF = rqe_embed['test']['faq']
         #testCF = np.c_[testC, testF,  np.abs(testC - testF), testC * testF]
-        testCF = np.hstack((testC, testF) #, testC * testF,np.abs(testC - testF)))
+        testCF = np.hstack((testC, testF))#, testC * testF,np.abs(testC - testF)))
         testY = rqe_embed['test']['label']
 
         config = {'nclasses': 2, 'seed': self.seed,
