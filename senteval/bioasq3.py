@@ -71,9 +71,7 @@ class BioASQEval(object):
             text_data['faq'] = [y for (x, y, z) in sorted_corpus]
             text_data['label'] = [z for (x, y, z) in sorted_corpus]
             #text_data['pid'] = [w for (x, y, z, w ) in sorted_corpus]
-            print(text_data['chq'])
-            print(text_data['faq'])
-            print(text_data['label'])
+            
             for txt_type in ['chq', 'faq']:
                 print(key,txt_type,rqe_embed)
                 rqe_embed[key][txt_type] = []
@@ -81,9 +79,7 @@ class BioASQEval(object):
                     batch = text_data[txt_type][ii:ii + params.batch_size]
                     embeddings = batcher(params, batch)
                     rqe_embed[key][txt_type].append(embeddings)
-                    for i,j in zip(batch,embeddings):
-                        print(i,j)
-                 
+                    
                 rqe_embed[key][txt_type] = np.vstack(rqe_embed[key][txt_type])
             rqe_embed[key]['label'] = np.array(text_data['label'])
             logging.info('Computed {0} embeddings'.format(key))
@@ -95,12 +91,13 @@ class BioASQEval(object):
         #trainCF = np.c_[trainC, trainF,np.abs(trainC - trainF), (trainC * trainF)]
         trainCF = np.hstack((trainC, trainF, trainC * trainF,np.abs(trainC - trainF)))
         trainY = rqe_embed['train']['label']
+        print(type(tainY)
 
         # Test
         testC = rqe_embed['test']['chq']
         testF = rqe_embed['test']['faq']
         #testCF = np.c_[testC, testF,  np.abs(testC - testF), testC * testF]
-        testCF = np.hstack((testC, testF, testC * testF,np.abs(testC - testF)))
+        testCF = np.hstack((testC, testF) #, testC * testF,np.abs(testC - testF)))
         testY = rqe_embed['test']['label']
 
         config = {'nclasses': 2, 'seed': self.seed,
@@ -112,6 +109,7 @@ class BioASQEval(object):
 
         devacc, testacc, yhat = clf.run()
         testf1 = round(100*f1_score(testY, yhat), 2)
+        print(yhat)
         logging.debug('Dev acc : {0} Test acc {1}; Test F1 {2} for RQE.\n'
                       .format(devacc, testacc, testf1))
         return {'devacc': devacc, 'acc': testacc, 'f1': testf1,
