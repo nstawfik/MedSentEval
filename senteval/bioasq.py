@@ -6,7 +6,7 @@
 #
 
 '''
-RQE : Recognizing Question Entailment for Medical Question Answering 
+BioASQ : Medical Question Answering 
 '''
 from __future__ import absolute_import, division, unicode_literals
 
@@ -34,9 +34,9 @@ class BioASQEval(object):
 
     def do_prepare(self, params, prepare):
         # TODO : Should we separate samples in "train, test"?
-        samples = self.rqe_data['train']['question'] + \
+        samples = self.qa_data['train']['question'] + \
                   self.qa_data['train']['snippet'] + \
-                  self.qa_data['test']['questions'] + self.rqe_data['test']['snippet']
+                  self.qa_data['test']['questions'] + self.qa_data['test']['snippet']
         return prepare(params, samples)
 
     def loadFile(self, fpath):
@@ -54,9 +54,9 @@ class BioASQEval(object):
         return qa_data
 
     def run(self, params, batcher):
-        rqe_embed = {'train': {}, 'test': {}}
+        qa_embed = {'train': {}, 'test': {}}
 
-        for key in self.rqe_data:
+        for key in self.qa_data:
             logging.info('Computing embedding for {0}'.format(key))
             # Sort to reduce padding
             text_data = {}
@@ -83,14 +83,14 @@ class BioASQEval(object):
         trainS = qa_embed['train']['snippet']
         #trainQS = np.c_[np.abs(trainQ - trainS), trainQ * trainS]
         trainQS = np.hstack((trainQ, trainS, trainQ * trainS,np.abs(trainQ - trainC)))
-        trainY = rqe_embed['train']['label']
+        trainY = qa_embed['train']['label']
 
         # Test
-        testQ = rqe_embed['test']['question']
-        testS = rqe_embed['test']['snippet']
+        testQ = qa_embed['test']['question']
+        testS = qa_embed['test']['snippet']
         #testQS = np.c_[np.abs(testQ - testS), testQ * testS]
         testQS = np.hstack((testQ, testS, testQ * testS,np.abs(testQ - testS)))
-        testY = rqe_embed['test']['label']
+        testY = qa_embed['test']['label']
 
         config = {'nclasses': 2, 'seed': self.seed,
                   'usepytorch': params.usepytorch,
