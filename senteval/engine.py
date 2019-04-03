@@ -6,10 +6,11 @@ Generic sentence evaluation scripts wrapper
 from __future__ import absolute_import, division, unicode_literals
 
 from senteval import utils
-from senteval.snli import SNLIEval
+from senteval.mednli import MedNLIEval
 from senteval.rqe import RQEEval
 from senteval.pubmed20k import PUBMED20KEval
 from senteval.bioc import BIOCEval
+from senteval.bioasq import BioASQEval
 from senteval.pico import PICOEval
 from senteval.clinicalsa import ClinicalSAEval
 from senteval.citationsa import CitationSAEval
@@ -37,7 +38,7 @@ class SE(object):
         self.batcher = batcher
         self.prepare = prepare if prepare else lambda x, y: None
 
-        self.list_tasks = ['BioC','CitationSA','ClinicalSA','BioASQ','PICO','PUBMED20K','RQE','ClinicalSTS','BIOSSES','MEDNLI']
+        self.list_tasks = ['BioC','CitationSA','ClinicalSA','BioASQ','PICO','PubMed20K','RQE','ClinicalSTS','BIOSSES','MedNLI']
                        
 
     def eval(self, name):
@@ -51,8 +52,8 @@ class SE(object):
 
         # MedSentEval tasks
         
-        if name == 'MEDNLI':
-            self.evaluation = SNLIEval(tpath + '/MEDNLI', seed=self.params.seed)
+        if name == 'MedNLI':
+            self.evaluation = MedNLIEval(tpath + '/MedNLI', seed=self.params.seed)
         elif name == 'RQE':
             self.evaluation = RQEEval(tpath + '/RQE', seed=self.params.seed)
         elif name == 'BioC':
@@ -61,12 +62,12 @@ class SE(object):
             self.evaluation = ClinicalSAEval(tpath + '/ClinicalSA', seed=self.params.seed) 
         elif name == 'CitationSA':
             self.evaluation = CitationSAEval(tpath + '/CitationSA', seed=self.params.seed) 
-        elif name == 'PUBMED20K':
-            self.evaluation = PUBMED20KEval(tpath + '/PUBMED20K', seed=self.params.seed)
+        elif name == 'PubMed20K':
+            self.evaluation = PubMed20KEval(tpath + '/PubMed20K', seed=self.params.seed)
         elif name == 'PICO':
             self.evaluation = PICOEval(tpath + '/PICO', seed=self.params.seed)
         elif name == 'BioASQ':
-            self.evaluation = BioASQEval(tpath + '/CHEMPROT', seed=self.params.seed)
+            self.evaluation = BioASQEval(tpath + '/BioASQ', seed=self.params.seed)
         elif name=='ClinicalSTS':
             self.evaluation = ClinicalSTSEval(tpath + '/ClinicalSTS', seed=self.params.seed)
         elif name=='BIOSSES':
