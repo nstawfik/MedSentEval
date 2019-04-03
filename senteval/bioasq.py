@@ -40,7 +40,7 @@ class BioASQEval(object):
         return prepare(params, samples)
 
     def loadFile(self, fpath):
-        rqe_data = {'chq': [], 'faq': [], 'label': [],'pid':[]}
+        rqe_data = {'chq': [], 'faq': [], 'label': []}
         tgt2idx = {'no': 0, 'yes': 1}
         with io.open(fpath, 'r', encoding='utf-8') as f:
             for line in f:
