@@ -25,9 +25,9 @@ class BioASQEval(object):
         logging.info('***** Transfer task : RQE *****\n\n')
         self.seed = seed
         train = self.loadFile(os.path.join(task_path,
-                              'rqe_train.txt'))
+                              'BioASQ_train.txt'))
         test = self.loadFile(os.path.join(task_path,
-                             'rqe_test.txt'))
+                             'BioASQ_test.txt'))
         
         self.rqe_data = {'train': train, 'test': test}
         
