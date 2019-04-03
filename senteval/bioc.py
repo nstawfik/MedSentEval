@@ -18,7 +18,7 @@ from senteval.tools.validation import InnerKFoldClassifier
 from sklearn.metrics import f1_score
 
 
-class BIOCEval(object):
+class BioCEval(object):
     def __init__(self, task_path, seed=1111):
         logging.info('***** Transfer task : BioContradiction *****\n\n')
         self.seed = seed
