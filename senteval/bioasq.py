@@ -20,7 +20,7 @@ from senteval.tools.validation import KFoldClassifier
 from sklearn.metrics import f1_score
 
 
-classBioASQEval(object):
+class BioASQEval(object):
     def __init__(self, task_path, seed=1111):
         logging.info('***** Transfer task : RQE *****\n\n')
         self.seed = seed
