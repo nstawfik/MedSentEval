@@ -91,7 +91,7 @@ class BioASQEval(object):
         #trainCF = np.c_[trainC, trainF,np.abs(trainC - trainF), (trainC * trainF)]
         trainCF = np.hstack((trainC, trainF, trainC * trainF,np.abs(trainC - trainF)))
         trainY = rqe_embed['train']['label']
-        print(type(tainY)
+        print(type(tainY))
 
         # Test
         testC = rqe_embed['test']['chq']
