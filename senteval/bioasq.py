@@ -81,8 +81,9 @@ class BioASQEval(object):
                     batch = text_data[txt_type][ii:ii + params.batch_size]
                     embeddings = batcher(params, batch)
                     rqe_embed[key][txt_type].append(embeddings)
-                    print(batch)
-                    print(key,txt_type,rqe_embed[key][txt_type])
+                    for i,j in zip(batch,embeddings):
+                        print(i,j)
+                 
                 rqe_embed[key][txt_type] = np.vstack(rqe_embed[key][txt_type])
             rqe_embed[key]['label'] = np.array(text_data['label'])
             logging.info('Computed {0} embeddings'.format(key))
@@ -106,8 +107,8 @@ class BioASQEval(object):
                   'usepytorch': params.usepytorch,
                   'classifier': params.classifier,
                   'nhid': params.nhid, 'kfold': params.kfold}
-        clf = KFoldClassifier(train={'X': trainCF, 'y': trainY},
-                              test={'X': testCF, 'y': testY}, config=config)
+        clf = KFoldClassifier(train={'X': trainC, 'y': trainY},
+                              test={'X': testC, 'y': testY}, config=config)
 
         devacc, testacc, yhat = clf.run()
         testf1 = round(100*f1_score(testY, yhat), 2)
