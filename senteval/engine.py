@@ -8,8 +8,8 @@ from __future__ import absolute_import, division, unicode_literals
 from senteval import utils
 from senteval.mednli import MedNLIEval
 from senteval.rqe import RQEEval
-from senteval.pubmed20k import PUBMED20KEval
-from senteval.bioc import BIOCEval
+from senteval.pubmed20k import PubMed20KEval
+from senteval.bioc import BioCEval
 from senteval.bioasq import BioASQEval
 from senteval.pico import PICOEval
 from senteval.clinicalsa import ClinicalSAEval
@@ -57,7 +57,7 @@ class SE(object):
         elif name == 'RQE':
             self.evaluation = RQEEval(tpath + '/RQE', seed=self.params.seed)
         elif name == 'BioC':
-            self.evaluation = BIOCEval(tpath + '/BIOC', seed=self.params.seed)   
+            self.evaluation = BioCEval(tpath + '/BIOC', seed=self.params.seed)   
         elif name == 'ClinicalSA':
             self.evaluation = ClinicalSAEval(tpath + '/ClinicalSA', seed=self.params.seed) 
         elif name == 'CitationSA':
