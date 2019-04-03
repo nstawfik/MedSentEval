@@ -75,8 +75,8 @@ class BioASQEval(object):
                     print(batch)
                     embeddings = batcher(params, batch)
                     print(embeddings.shape)
-                    for i,j in zip(batch,embeddings)
-                    print(i,j)
+                    for i,j in zip(batch,embeddings):
+                        print(i,j)
                     qa_embed[key][txt_type].append(embeddings)
                 qa_embed[key][txt_type] = np.vstack(qa_embed[key][txt_type])
             qa_embed[key]['label'] = np.array(text_data['label'])
