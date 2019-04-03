@@ -29,14 +29,14 @@ class BioASQEval(object):
         test = self.loadFile(os.path.join(task_path,
                              'BioASQ_test.txt'))
         
-        self.rqe_data = {'train': train, 'test': test}
+        self.qa_data = {'train': train, 'test': test}
         
 
     def do_prepare(self, params, prepare):
         # TODO : Should we separate samples in "train, test"?
-        samples = self.rqe_data['train']['chq'] + \
-                  self.rqe_data['train']['faq'] + \
-                  self.rqe_data['test']['chq'] + self.rqe_data['test']['faq']
+        samples = self.rqe_data['train']['question'] + \
+                  self.rqe_data['train']['snippet'] + \
+                  self.rqe_data['test']['questions'] + self.rqe_data['test']['snippet']
         return prepare(params, samples)
 
     def loadFile(self, fpath):
