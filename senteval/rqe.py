@@ -85,16 +85,16 @@ class RQEEval(object):
         # Train
         trainC = rqe_embed['train']['chq']
         trainF = rqe_embed['train']['faq']
-        print(trainC.shape,trainF.shape,(np.abs(trainC - trainF)).shape, (trainC * trainF).shape)
-        trainCF = np.c_[trainC, trainF,np.abs(trainC - trainF), (trainC * trainF)]
-        #trainCF = np.hstack((trainC, trainF, trainC * trainF,np.abs(trainC - trainF)))
+        #print(trainC.shape,trainF.shape,(np.abs(trainC - trainF)).shape, (trainC * trainF).shape)
+        #trainCF = np.c_[trainC, trainF,np.abs(trainC - trainF), (trainC * trainF)]
+        trainCF = np.hstack((trainC, trainF, trainC * trainF,np.abs(trainC - trainF)))
         trainY = rqe_embed['train']['label']
 
         # Test
         testC = rqe_embed['test']['chq']
         testF = rqe_embed['test']['faq']
-        testCF = np.c_[testC, testF,  np.abs(testC - testF), testC * testF]
-        #testCF = np.hstack((testC, testF, testC * testF,np.abs(testC - testF)))
+        #testCF = np.c_[testC, testF,  np.abs(testC - testF), testC * testF]
+        testCF = np.hstack((testC, testF, testC * testF,np.abs(testC - testF)))
         testY = rqe_embed['test']['label']
 
         config = {'nclasses': 2, 'seed': self.seed,
