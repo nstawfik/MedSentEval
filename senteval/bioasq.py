@@ -108,7 +108,7 @@ class BioASQEval(object):
         config_classifier = copy.deepcopy(params.classifier)
         #config_classifier['max_epoch'] = 15
         config_classifier['epoch_size'] = 8
-        config_classifier['batch_size'] =8
+        config_classifier['batch_size'] =4
         config['classifier'] = config_classifier
         print(config_classifier)
         
