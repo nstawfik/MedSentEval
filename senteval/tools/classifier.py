@@ -162,6 +162,7 @@ MLP with Pytorch (nhid=0 --> Logistic Regression)
 
 
 class MLP(PyTorchClassifier):
+    print(params)
     def __init__(self, params, inputdim, nclasses, l2reg=0., batch_size=64,
                  seed=1111, cudaEfficient=False):
         super(self.__class__, self).__init__(inputdim, nclasses, l2reg,
