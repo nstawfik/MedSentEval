@@ -14,6 +14,7 @@ import os
 import logging
 import numpy as np
 import io
+import copy
 
 from senteval.tools.validation import KFoldClassifier
 
