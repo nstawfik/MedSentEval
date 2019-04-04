@@ -44,7 +44,7 @@ class InnerKFoldClassifier(object):
         self.seed = config['seed']
         self.devresults = []
         self.testresults = []
-        #self.f1results=[]
+        self.f1results=[]
         self.usepytorch = config['usepytorch']
         self.classifier_config = config['classifier']
         self.modelname = get_classif_name(self.classifier_config, self.usepytorch)
@@ -101,6 +101,7 @@ class InnerKFoldClassifier(object):
         testaccuracy = round(np.mean(self.testresults), 2)
         testf1=round(np.mean(self.f1results), 2)
         return devaccuracy, testaccuracy , testf1
+    
 class KFoldClassifier(object):
     """
     (train, test) split classifier : cross-validation on train.
