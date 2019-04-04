@@ -109,7 +109,8 @@ class BioASQEval(object):
         config_classifier['max_epoch'] = 8
         config_classifier['epoch_size'] = 8
         config_classifier['batch_size'] =8
-        print(params.classifier)
+        config['classifier'] = config_classifier
+        print(config_classifier)
         
         clf = KFoldClassifier(train={'X': trainQS, 'y': trainY},
                               test={'X': testQS, 'y': testY}, config=config)
