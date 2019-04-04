@@ -106,9 +106,9 @@ class BioASQEval(object):
                   'nhid': params.nhid, 'kfold': params.kfold}
 
         config_classifier = copy.deepcopy(params.classifier)
-        config_classifier['max_epoch'] = 1
-        config_classifier['epoch_size'] = 64
-        config_classifier['batch_size'] = 8
+        config_classifier['max_epoch'] = 4
+        config_classifier['epoch_size'] = 128
+        config_classifier['batch_size'] =128
         
         
         clf = KFoldClassifier(train={'X': trainQS, 'y': trainY},
