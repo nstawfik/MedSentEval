@@ -175,7 +175,7 @@ class MLP(PyTorchClassifier):
         -max_epoch:  max number of epoches
         -dropout:    dropout for MLP
         """
-        print(params["batch_size"], params["max_epoch"],params["epoch_size"])
+        print(params)
         self.nhid = 0 if "nhid" not in params else params["nhid"]
         self.optim = "adam" if "optim" not in params else params["optim"]
         self.tenacity = 5 if "tenacity" not in params else params["tenacity"]
@@ -198,7 +198,7 @@ class MLP(PyTorchClassifier):
 
         self.loss_fn = nn.CrossEntropyLoss().cuda()
         self.loss_fn.size_average = False
-        print(model.parameters())
+        
         optim_fn, optim_params = utils.get_optimizer(self.optim)
         self.optimizer = optim_fn(self.model.parameters(), **optim_params)
         self.optimizer.param_groups[0]['weight_decay'] = self.l2reg
