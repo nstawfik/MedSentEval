@@ -14,6 +14,7 @@ import os
 import logging
 import numpy as np
 import io
+import copy
 
 from senteval.tools.validation import KFoldClassifier
 
@@ -105,9 +106,9 @@ class BioASQEval(object):
                   'nhid': params.nhid, 'kfold': params.kfold}
 
         config_classifier = copy.deepcopy(params.classifier)
-        config_classifier['max_epoch'] = 15
-        config_classifier['epoch_size'] = 1
-        config['classifier'] = config_classifier
+        config_classifier['max_epoch'] = 1
+        config_classifier['epoch_size'] = 64
+        config_classifier['batch_size'] = 8
         
         
         clf = KFoldClassifier(train={'X': trainQS, 'y': trainY},
