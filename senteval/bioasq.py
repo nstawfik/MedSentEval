@@ -89,9 +89,9 @@ class BioASQEval(object):
         #trainQS = np.c_[np.abs(trainQ - trainS), trainQ * trainS]
         trainQS = np.hstack((trainQ, trainS, trainQ * trainS,np.abs(trainQ - trainS)))
         trainY = qa_embed['train']['label']
-        print(trainQ)
-        print(trainS)
-        print(trainQS)
+        #print(trainQ)
+        #print(trainS)
+        #print(trainQS)
 
         # Test
         testQ = qa_embed['test']['question']
