@@ -107,6 +107,14 @@ class BioASQEval(object):
                   'usepytorch': params.usepytorch,
                   'classifier': params.classifier,
                   'nhid': params.nhid, 'kfold': params.kfold}
+
+        config_classifier = copy.deepcopy(params.classifier)
+        config_classifier['max_epoch'] = 15
+        config_classifier['epoch_size'] = 1
+        
+        
+        config['classifier'] = config_classifier
+        
         print(trainC)
         print(testC)
         clf = KFoldClassifier(train={'X': trainC, 'y': trainY},
