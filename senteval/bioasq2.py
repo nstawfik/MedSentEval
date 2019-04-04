@@ -98,11 +98,18 @@ class BioASQEval(object):
         #testQS = np.c_[np.abs(testQ - testS), testQ * testS]
         testQS = np.hstack((testQ, testS, testQ * testS,np.abs(testQ - testS)))
         testY = qa_embed['test']['label']
-
+        
         config = {'nclasses': 2, 'seed': self.seed,
                   'usepytorch': params.usepytorch,
                   'classifier': params.classifier,
                   'nhid': params.nhid, 'kfold': params.kfold}
+
+        config_classifier = copy.deepcopy(params.classifier)
+        config_classifier['max_epoch'] = 15
+        config_classifier['epoch_size'] = 1
+        config['classifier'] = config_classifier
+        
+        
         clf = KFoldClassifier(train={'X': trainQS, 'y': trainY},
                               test={'X': testQS, 'y': testY}, config=config)
 
