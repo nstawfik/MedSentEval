@@ -175,7 +175,7 @@ class MLP(PyTorchClassifier):
         -max_epoch:  max number of epoches
         -dropout:    dropout for MLP
         """
-        print(params)
+        
         self.nhid = 0 if "nhid" not in params else params["nhid"]
         self.optim = "adam" if "optim" not in params else params["optim"]
         self.tenacity = 5 if "tenacity" not in params else params["tenacity"]
