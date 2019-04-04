@@ -176,7 +176,7 @@ class MLP(PyTorchClassifier):
         -max_epoch:  max number of epoches
         -dropout:    dropout for MLP
         """
-        print(params)
+        
         self.nhid = 0 if "nhid" not in params else params["nhid"]
         self.optim = "adam" if "optim" not in params else params["optim"]
         self.tenacity = 5 if "tenacity" not in params else params["tenacity"]
@@ -184,7 +184,7 @@ class MLP(PyTorchClassifier):
         self.max_epoch = 200 if "max_epoch" not in params else params["max_epoch"]
         self.dropout = 0. if "dropout" not in params else params["dropout"]
         self.batch_size = 64 if "batch_size" not in params else params["batch_size"]
-        
+        print(params)
         if params["nhid"] == 0:
             self.model = nn.Sequential(
                 nn.Linear(self.inputdim, self.nclasses),
