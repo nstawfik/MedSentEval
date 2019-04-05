@@ -93,7 +93,10 @@ class InnerKFoldClassifier(object):
                 clf.fit(X_train, y_train)
             
             yhat = clf.predict(X_test)
-            self.f1results.append(round(100*f1_score(yhat,y_test), 2))
+            if (self.nclasses ==2):
+                self.f1results.append(round(100*f1_score(yhat,y_test), 2))
+            else:
+                self.f1results.append(round(100*f1_score(yhat,y_test,average=None), 2))
             self.testresults.append(round(100*clf.score(X_test, y_test), 2))
             
         
