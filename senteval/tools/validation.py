@@ -95,14 +95,16 @@ class InnerKFoldClassifier(object):
             yhat = clf.predict(X_test)
             if (self.nclasses ==2):
                 self.f1results.append(round(100*f1_score(yhat,y_test), 2))
-            else:
-                self.f1results.append(round(100*f1_score(yhat,y_test,average=None), 2))
+           
             self.testresults.append(round(100*clf.score(X_test, y_test), 2))
             
         
         devaccuracy = round(np.mean(self.devresults), 2)
         testaccuracy = round(np.mean(self.testresults), 2)
-        testf1=round(np.mean(self.f1results), 2)
+        if self.f1results:
+            testf1=round(np.mean(self.f1results), 2)
+        else:
+            testf1=None
         return devaccuracy, testaccuracy , testf1
     
 class KFoldClassifier(object):
