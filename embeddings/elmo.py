@@ -108,7 +108,8 @@ def batcher(params, batch):
         comb_elmo_embedding = np.concatenate(elmo_embedding, axis=1)
 	print(comb_elmo_embedding.shape)
         
-        mowe_elmo=np.mean(comb_elmo_embedding, axis=0)   
+        mowe_elmo=np.mean(comb_elmo_embedding, axis=0) 
+	print(mowe_elmo.shape)
         embeddings.append(mowe_elmo)
         
     embeddings = np.vstack(embeddings)
