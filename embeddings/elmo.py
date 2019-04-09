@@ -98,7 +98,7 @@ def batcher(params, batch):
 
        
     #for elmo_embedding in params.elmo.embed_sentences(batch):  
-    for elmo_embedding in params_senteval['elmo'].embed_sentences(batch):  
+    for elmo_embedding in params_senteval['elmo'].embed_sentences(batch):
 	print(elmo_embedding.shape)
         # Average the 3 layers returned from ELMo #1024
         avg_elmo_embedding = np.average(elmo_embedding, axis=0)
