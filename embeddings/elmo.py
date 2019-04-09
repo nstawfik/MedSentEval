@@ -100,11 +100,13 @@ def batcher(params, batch):
     #for elmo_embedding in params.elmo.embed_sentences(batch):  
     for elmo_embedding in params_senteval['elmo'].embed_sentences(batch):
     	avg_elmo_embedding = np.average(elmo_embedding, axis=0)  #avERGAE 3 layer returned 1024      
-	comb_elmo_embedding = np.concatenate(elmo_embedding, axis=1)#concatenate the 3 layers returned from ELMo #3074
-	mowe_elmo=np.mean(comb_elmo_embedding, axis=0) 
+    	comb_elmo_embedding = np.concatenate(elmo_embedding, axis=1) #concatenate the 3 layers returned from ELMo 3074
+    	mowe_elmo=np.mean(comb_elmo_embedding, axis=0) 
     	embeddings.append(mowe_elmo)
-	print(elmo_embedding.shape,avg_elmo_embedding.shape,comb_elmo_embedding.shape,mowe_elmo)
+    	print(elmo_embedding.shape,avg_elmo_embedding.shape,comb_elmo_embedding.shape,mowe_elmo)
         
+        
+
     embeddings = np.vstack(embeddings)
     return embeddings
   
