@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, unicode_literals,print_function 
+rom __future__ import absolute_import, division, unicode_literals,print_function 
 import sys
 import numpy as np
 import logging
@@ -407,13 +407,17 @@ def batcher(params, batch):
         all_features.append(features)
       sent_vecNP=np.array([np.array(xi) for xi in sent_vec])  
       mowe_bert=np.mean(sent_vecNP, axis=0)   
-      print(mowe_bert.shape)
+      #print(sent_vecNP.shape,mowe_bert.shape)
       embeddings.append(mowe_bert)
-    
-      embeddings = np.vstack(embeddings)
-      print(embeddings.shape)
-      return embeddings
+        
       
+      #all_features.append(sentVec)
+      #output_json["features"] = all_features
+      #writer.write(json.dumps(output_json) + "\n")
+      #print(tokens,mowe_bert.shape)
+    
+    embeddings = np.vstack(embeddings)
+    return embeddings
 
 
 if __name__ == "__main__":
