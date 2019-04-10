@@ -407,7 +407,7 @@ def batcher(params, batch):
         all_features.append(features)
       sent_vecNP=np.array([np.array(xi) for xi in sent_vec])  
       mowe_bert=np.mean(sent_vecNP, axis=0)   
-      #print(sent_vecNP.shape,mowe_bert.shape)
+      print(mowe_bert.shape)
       embeddings.append(mowe_bert)
         
       
@@ -417,6 +417,7 @@ def batcher(params, batch):
       #print(tokens,mowe_bert.shape)
     
     embeddings = np.vstack(embeddings)
+print(embeddings.shape)
     return embeddings
 
 
