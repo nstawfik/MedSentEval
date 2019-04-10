@@ -409,16 +409,11 @@ def batcher(params, batch):
       mowe_bert=np.mean(sent_vecNP, axis=0)   
       print(mowe_bert.shape)
       embeddings.append(mowe_bert)
-        
-      
-      #all_features.append(sentVec)
-      #output_json["features"] = all_features
-      #writer.write(json.dumps(output_json) + "\n")
-      #print(tokens,mowe_bert.shape)
     
-    embeddings = np.vstack(embeddings)
-print(embeddings.shape)
-    return embeddings
+      embeddings = np.vstack(embeddings)
+      print(embeddings.shape)
+      return embeddings
+      
 
 
 if __name__ == "__main__":
