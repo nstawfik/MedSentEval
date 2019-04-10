@@ -83,6 +83,7 @@ def batcher(params, batch):
       
     for sent in  sentences: 
         embeddings.append(sent.embedding.numpy())
+        print(sent.embedding.numpy().shape)
         
     embeddings = np.vstack(embeddings)
     return embeddings
