@@ -5,3 +5,6 @@ Our goal is to evaluate text representations algorithms intended mainly for gene
 Codes and experiments in this repository are based on the original SentEval code with adapttaion to the biomedical domain. 
 
 ** Source code for Tawfik and Spruit Manuscript "E********* S******* R************** f** B********* T***:  M****** a** E*********** R******". (under review as of April 2019).
+
+## Refrences
+Conneau, Alexis, and Douwe Kiela. "Senteval: An evaluation toolkit for universal sentence representations." arXiv preprint arXiv:1803.05449 (2018).
