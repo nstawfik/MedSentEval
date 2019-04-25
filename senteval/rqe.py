@@ -105,7 +105,7 @@ class RQEEval(object):
                               test={'X': testCF, 'y': testY}, config=config)
 
         devacc, testacc, yhat = clf.run()
-        pred==[]
+        pred=[]
         print(text_data['pid'])
         for i in yhat:
             pred.append(i)
