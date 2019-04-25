@@ -105,6 +105,7 @@ class RQEEval(object):
                               test={'X': testCF, 'y': testY}, config=config)
 
         devacc, testacc, yhat = clf.run()
+        print(text_data['pid'])
         print(yhat)
         testf1 = round(100*f1_score(testY, yhat), 2)
         logging.debug('Dev acc : {0} Test acc {1}; Test F1 {2} for RQE.\n'
