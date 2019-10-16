@@ -46,18 +46,18 @@ How to use SentEval: examples
 examples/bow.py
 In examples/bow.py, we evaluate the quality of the average of word embeddings.
 
-References
-Please considering citing [1] if using this code for evaluating sentence embedding methods.
+%##References
+%Please considering citing [1] if using this code for evaluating sentence embedding methods.
 
-SentEval: An Evaluation Toolkit for Universal Sentence Representations
-[1] A. Conneau, D. Kiela, SentEval: An Evaluation Toolkit for Universal Sentence Representations
+%SentEval: An Evaluation Toolkit for Universal Sentence Representations
+%[1] A. Conneau, D. Kiela, SentEval: An Evaluation Toolkit for Universal Sentence Representations
 
-@article{conneau2018senteval,
-  title={SentEval: An Evaluation Toolkit for Universal Sentence Representations},
-  author={Conneau, Alexis and Kiela, Douwe},
-  journal={arXiv preprint arXiv:1803.05449},
-  year={2018}
-}
+%@article{conneau2018senteval,
+  %title={SentEval: An Evaluation Toolkit for Universal Sentence Representations},
+  %author={Conneau, Alexis and Kiela, Douwe},
+  %journal={arXiv preprint arXiv:1803.05449},
+ % year={2018}
+%}
 
 ## Refrences
 [1] Conneau, Alexis, and Douwe Kiela. "Senteval: An evaluation toolkit for universal sentence representations." arXiv preprint arXiv:1803.05449 (2018).
