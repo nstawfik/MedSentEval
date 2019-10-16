@@ -46,7 +46,7 @@ How to use SentEval: examples
 examples/bow.py
 In examples/bow.py, we evaluate the quality of the average of word embeddings.
 
-%##References
+<!---##References--->
 %Please considering citing [1] if using this code for evaluating sentence embedding methods.
 
 %SentEval: An Evaluation Toolkit for Universal Sentence Representations
