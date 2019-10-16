@@ -6,6 +6,8 @@ Codes and experiments in this repository are based on the original SentEval code
 
 ** Source code for Tawfik and Spruit Manuscript "E********* S******* R************** f** B********* T***:  M****** a** E*********** R******". (under review as of April 2019).
 
+[1] Conneau, Alexis, and Douwe Kiela. "Senteval: An evaluation toolkit for universal sentence representations." arXiv preprint arXiv:1803.05449 (2018).
+
 ## Included Tasks
  | Dataset  | Task  | Source  | Example |  Label  |
  | ------------- | ------------- |------------- | ------------------ | ------------- | 
@@ -59,5 +61,3 @@ In examples/bow.py, we evaluate the quality of the average of word embeddings.
  <!---year={2018}--->
 <!---}--->
 
-## Refrences
-[1] Conneau, Alexis, and Douwe Kiela. "Senteval: An evaluation toolkit for universal sentence representations." arXiv preprint arXiv:1803.05449 (2018).
