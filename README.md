@@ -37,11 +37,12 @@ The script will download all datasets that are publically avaiable without permi
 | FastText  | Common Crawl  | https://s3-us-west-1.amazonaws.com/fasttext-vectors/crawl-300d-2M.vec.zip | 
 | FastText_PubMed | 2016 PubMed  | http://www.llwang.net/pubmed_fasttext/pubmed_noncomm_fasttext_model.vec.tar.gz | 
 | BERT |   |https://storage.googleapis.com/bert_models/2018_10_18/cased_L-12_H-768_A-12.zip |
+| ELMo | Wikipedia and news crawl data | https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x4096_512_2048cnn_2xhighway_5.5B/elmo_2x4096_512_2048cnn_2xhighway_5.5B_weights.hdf5 <br /> https://s3-us-west2.amazonaws.com/allennlp/models/elmo/2x4096_512_2048cnn_2xhighway_5.5B/elmo_2x4096_512_2048cnn_2xhighway_5.5B_options.json |
+| ELMO_PubMed | PubMed| https://s3-us-west2.amazonaws.com/allennlp/models/elmo/contributed/pubmed/elmo_2x4096_512_2048cnn_2xhighway_weights_PubMed_only.hdf5 <br /> https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/contributed/pubmed/elmo_2x4096_512_2048cnn_2xhighway_options.json |
 | BioBERT | PubMed| |
 | SciBERT | biomedical and computer sciences | https://s3-us-west-2.amazonaws.com/ai2-s2-research/scibert/tensorflow_models/scibert_scivocab_uncased.tar.gz |
 | Flair | web, Wikipedia, and Subtitles for the English language | https://s3.eu-central-1.amazonaws.com/alan-nlp/resources/embeddings-v0.4.1/big-news-forward--h2048-l1-d0.05-lr30-0.25-20/news-forward-0.4.1.pt <br /> https://s3.eu-central-1.amazonaws.com/alan-nlp/resources/embeddings-v0.4.1/big-news-backward--h2048-l1-d0.05-lr30-0.25-20/news-backward-0.4.1.pt |
-| Flair_PubMed| PubMED | https://s3.eu-central-1.amazonaws.com/alan-nlp/resources/embeddings-v0.4.1/pubmed-2015-fw-lm.pt
-      <br />      https://s3.eu-central-1.amazonaws.com/alan-nlp/resources/embeddings-v0.4.1/pubmed-2015-bw-lm.pt|
+| Flair_PubMed| PubMED | https://s3.eu-central-1.amazonaws.com/alan-nlp/resources/embeddings-v0.4.1/pubmed-2015-fw-lm.pt <br />      https://s3.eu-central-1.amazonaws.com/alan-nlp/resources/embeddings-v0.4.1/pubmed-2015-bw-lm.pt |
 |InferSent | SNLI | https://dl.fbaipublicfiles.com/infersent/infersent2.pklhttps://dl.fbaipublicfiles.com/infersent/infersent2.pkl |
 |Bio_InferSent | MedNLI |  |
 |USE | Wikipedia, news, questions/answers, SNLI| https://tfhub.dev/google/universal-sentence-encoder-large/3 |
