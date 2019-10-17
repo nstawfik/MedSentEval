@@ -31,7 +31,7 @@ python setup.py install
  ### Download datasets
  To get all the transfer tasks datasets, run (in data/):
 ```
-./download_data.bash
+./get_data.bash
 ```
 The script will download all datasets that are publically avaiable without permission. For other data, fulfill the requirments to gain permission and put it under ./data/ 
 
