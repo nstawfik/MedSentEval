@@ -30,8 +30,9 @@ Codes and experiments in this repository are based on the original SentEval code
 The script will download all datasets that are publically avaiable without permission. For other data, fulfill the requirments to gain permission and put it under ./data/ 
 
 ## Embedding models
-| Embedding  | Description  | Source |
-| ------------- | ------------- |------------- | 
+| Embedding Model | Description  | Source | Description  | Source |
+| ------------- | ------------- |------------- | ------------- | ------------- |------------- | 
+| GloVE  | Common Crawl  | https://nlp.stanford.edu/projects/glove/ | 2016 PubMed  | https://slate.cse.ohio-state.edu/BMASS/
 
 ### Download Pre-trained models:
 YOu can download state-of-the-art open-domain and biomedical embeddings individually to the ./embedding/ or run the following script
