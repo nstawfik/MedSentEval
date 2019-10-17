@@ -31,7 +31,7 @@ mkdir -p ../ClinicalSA
 cd ../ClinicalSA
 wget https://sbmi.uth.edu/ontology/files/TweetsAnnotationResults.zip
 unzip TweetsAnnotationResults.zip
-java  -jar AnnotationResults/DownloadTweets.jar AnnotationResults/TweetsAnnotation.txt ./train_temp.txt >/dev/null
+#java  -jar AnnotationResults/DownloadTweets.jar AnnotationResults/TweetsAnnotation.txt ./train_temp.txt >/dev/null
 
   
 #get BioASQ
