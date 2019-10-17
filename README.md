@@ -36,10 +36,6 @@ The script will download all datasets that are publically avaiable without permi
 | GloVe_PubMed | 2016 PubMed  | https://slate.cse.ohio-state.edu/BMASS/PubMed_Glove.bin | 
 | FastText  | Common Crawl  | https://s3-us-west-1.amazonaws.com/fasttext-vectors/crawl-300d-2M.vec.zip | 
 | FastText_PubMed | 2016 PubMed  | http://www.llwang.net/pubmed_fasttext/pubmed_noncomm_fasttext_model.vec.tar.gz | 
-| ELMo | Wikipedia and news crawl data | https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x4096_512_2048cnn_2xhighway_5.5B/elmo_2x4096_512_2048cnn_2xhighway_5.5B_weights.hdf5 
-<br /> https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x4096_512_2048cnn_2xhighway_5.5B/elmo_2x4096_512_2048cnn_2xhighway_5.5B_options.json |
-| ELMO_PubMed | PubMed| https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/contributed/pubmed/elmo_2x4096_512_2048cnn_2xhighway_weights_PubMed_only.hdf5 
-<br /> https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/contributed/pubmed/elmo_2x4096_512_2048cnn_2xhighway_options.json |
 | BERT |   |https://storage.googleapis.com/bert_models/2018_10_18/cased_L-12_H-768_A-12.zip |
 | BioBERT | PubMed| |
 | SciBERT | biomedical and computer sciences | https://s3-us-west-2.amazonaws.com/ai2-s2-research/scibert/tensorflow_models/scibert_scivocab_uncased.tar.gz |
