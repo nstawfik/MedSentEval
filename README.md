@@ -66,9 +66,28 @@ YOu can download state-of-the-art open-domain and biomedical embeddings individu
 
 ## Usage Examples
 We provide jupyter notebook (MedSentEval_tutorial) to evaluate some of the embeddings models on different datasets. 
+
+### Current list of available tasks: 
+```
+['BioC','CitationSA','ClinicalSA','BioASQ','PICO','PubMed20K','RQE','ClinicalSTS','BIOSSES','MedNLI']
+```
+SentEval parameters
+Global parameters of SentEval:
+
+### Original senteval classification parameters
+```
+nhid:                       # number of hidden units (0: Logistic Regression, >0: MLP); Default nonlinearity: Tanh
+optim:                      # optimizer ("sgd,lr=0.1", "adam", "rmsprop" ..)
+tenacity:                   # how many times dev acc does not increase before training stops
+epoch_size:                 # each epoch corresponds to epoch_size pass on the train set
+max_epoch:                  # max number of epoches
+dropout:                    # dropout for MLP
+```
  
 ## Add a New Sentence Encoder
-As required by SentEval, this script implements two functions: prepare (optional) and batcher (required) that turn text sentences into sentence embeddings. Then SentEval takes care of the evaluation on the transfer tasks using the embeddings as features.
+As required by SentEval, this script implements two functions: prepare (optional) and batcher (required) that turn text sentences into sentence embeddings. Then SentEval takes care of the evaluation on the transfer tasks using the embeddings as features. Re-implement the batch and prepare function for your own sentence encoder.
+
+## Add a New Classification Model
 
 <!---##References--->
 <!---%Please considering citing [1] if using this code for evaluating sentence embedding methods.--->
