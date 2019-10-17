@@ -65,13 +65,10 @@ YOu can download state-of-the-art open-domain and biomedical embeddings individu
 ```
 
 ## Usage Examples
-In the ./examples folder we provide jupyter notebooks to evaluate soome embeddings models on different datasets. Modify 
+We provide jupyter notebook (MedSentEval_tutorial) to evaluate some of the embeddings models on different datasets. 
+ 
 ## Add a New Sentence Encoder
 As required by SentEval, this script implements two functions: prepare (optional) and batcher (required) that turn text sentences into sentence embeddings. Then SentEval takes care of the evaluation on the transfer tasks using the embeddings as features.
-
-How to use SentEval: examples
-examples/bow.py
-In examples/bow.py, we evaluate the quality of the average of word embeddings.
 
 <!---##References--->
 <!---%Please considering citing [1] if using this code for evaluating sentence embedding methods.--->
