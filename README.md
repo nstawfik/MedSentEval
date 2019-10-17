@@ -9,9 +9,9 @@ Codes and experiments in this repository are based on the original SentEval code
 [1] Conneau, Alexis, and Douwe Kiela. "Senteval: An evaluation toolkit for universal sentence representations." arXiv preprint arXiv:1803.05449 (2018).
 ## Installation
 ```
-!git clone https://github.com/nstawfik/MedSentEval
-%cd ./MedSentEval
-!python setup.py install
+git clone https://github.com/nstawfik/MedSentEval
+cd ./MedSentEval
+python setup.py install
 ```
 
 ## Included Tasks
