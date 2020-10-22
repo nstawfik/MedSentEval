@@ -24,9 +24,9 @@ class PICOEval(object):
     def __init__(self, task_path, seed=1111):
         logging.info('***** Transfer task : PICO *****\n\n')
         self.seed = seed
-        self.train = self.loadFile(os.path.join(task_path, 'PICO_train.txt'))
-        self.test = self.loadFile(os.path.join(task_path, 'PICO_test.txt'))
-        self.valid = self.loadFile(os.path.join(task_path, 'PICO_dev.txt'))
+        self.train = self.loadFile(os.path.join(task_path, 'train.txt'))
+        self.test = self.loadFile(os.path.join(task_path, 'test.txt'))
+        self.valid = self.loadFile(os.path.join(task_path, 'dev.txt'))
 
     def do_prepare(self, params, prepare):
         samples = self.train['X'] + self.test['X']+self.valid['X']
