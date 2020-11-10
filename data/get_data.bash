@@ -48,11 +48,10 @@ mkdir -p ../ClinicalSTS
 #get BIOSSES
 mkdir -p ../BIOSSES
 cd ../BIOSSES
-wget http://tabilab.cmpe.boun.edu.tr/BIOSSES/Downloads/BIOSSES-Dataset.rar
 wget https://bitbucket.org/gizemsogancioglu/biosses-resources/raw/52a77008d6c80ea570fa717136421b8c81683aa2/resources.zip
 unzip -p resources.zip correlationResult/groundTruth/test.txt > STS.gs.BIOSSES.txt
 unzip -p resources.zip sentencePairsData/pairs.txt > temp.txt
-awk 'BEGIN{FS="\t|    "}{print$2 $3}' temp.txt > STS.input.BIOSSES.txt
+awk 'BEGIN{FS="\t"}{printf ("%s\t%s\n", $2, $3)}' temp.txt > STS.input.BIOSSES.txt
 
 #prepare data files
 python ../prepare_data.py
