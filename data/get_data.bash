@@ -1,6 +1,6 @@
 
 #get MedNLI
-mkdir -p /MedNLI
+mkdir -p ./MedNLI
 
 #getRQE
 mkdir -p ./RQE
